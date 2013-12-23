@@ -156,6 +156,56 @@ class Product extends DB {
 		}
 		return TRUE;
 	}
+	/*
+	Speichert eine Pizza
+	*/
+	public function saveProduct(){
+	
+		//Starte Transaktion
+		$this->doQuery("START TRANSACTION");
+		$customer = new customer($this->getCustomerID());
+	
+		
+		
+		//Erstelle insert-Statement
+		$sql_save_product = sprintf("INSERT INTO `" . TABLE_PRODUCT . "`
+				(`ProductName`, `ProductPrice`, `Private`,`Description`,`Available`,`CustomerID`)
+				VALUES ('%s', '%s', '%s', '%s','%s','%s')",
+				mysql_real_escape_string($this->getName()),
+				mysql_real_escape_string($this->getPrice()),
+				mysql_real_escape_string($this->getPrivate()),
+				mysql_real_escape_string('Erstellt von '.  $customer->getFirstname() .' '. $customer->getLastname() ),
+				mysql_real_escape_string(1),
+				mysql_real_escape_string($this->getCustomerID()));
+
+		$result_save_prdocut = $this->doQuery($sql_save_product);
+		$this->setID($this->insert_id());
+				
+		$ingredients = 	$this->getIngredients();
+		
+		foreach ($ingredients  as $i){
+		$sql_save_ingredient = sprintf("INSERT INTO `" . TABLE_PRODUCT_HAS_INGREDIENT . "`
+				(`IngredientID`, `ProductID`)
+				VALUES ('%s', '%s')",
+				mysql_real_escape_string($i),
+				mysql_real_escape_string($this->getID()));
+		
+				
+		$result_save_ingredient = $this->doQuery($sql_save_ingredient);
+				
+		}
+		
+		//wenn alles glatt lief, commit, ansonsten rollback
+		if ($result_save_prdocut && $result_save_ingredient) {
+		    $this->doQuery("COMMIT");
+		    return $this->productID;
+		} else {        
+		    $this->doQuery("ROLLBACK");
+		    return FALSE;
+		}
+				
+		
+	}
 	
 	/*
 	 * getter und setter
@@ -163,6 +213,9 @@ class Product extends DB {
 
 	public function getID() {
 		return $this->productID;
+	}
+	public function setID($productID){
+		$this->productID = $productID;
 	}
 
 	public function getName() {

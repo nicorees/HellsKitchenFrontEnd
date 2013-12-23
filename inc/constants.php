@@ -4,7 +4,7 @@
 define("DB_HOST", "localhost:3306");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB", "wfprj_15");
+define("DB", "wfprj_09");
 
 // database tables
 define("TABLE_ADDRESS", "address");
@@ -24,7 +24,7 @@ define("MAIN_ADDRESS", "89415 Lauingen, Herzog-Georg-Strasse 16");
 define("GOOGLEMAPS_API_URL", "http://maps.googleapis.com/maps/api/distancematrix/xml?origins=%s+DE&destinations=%s+DE&mode=driving&language=de-DE&sensor=false");
 
 // system constants
-define("URL_BASE", "http://localhost:90/hellskitchen/");
-define("DOC_ROOT", "C:/Users/Nico/Documents/GitHub/HellsKitchenFrontEnd/");
+define("URL_BASE", "http://localhost/pizza_mvc/");
+define("DOC_ROOT", "J:/xampp/htdocs/pizza_mvc/");
 
 // end of constants.php

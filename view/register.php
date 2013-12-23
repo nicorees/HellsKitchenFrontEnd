@@ -1,5 +1,5 @@
 <?php	
-	if(isset($_POST['btn_register'])){
+	if(isset($_POST['txt_plz']) ){
 		
 		//lege neuen Customer an
 		$customer = new Customer();
@@ -12,7 +12,6 @@
 		$customer->setStreet($_POST['txt_strasse']);
 		$customer->setZip($_POST['txt_plz']);
 		$customer->setCity($_POST['txt_stadt']);
-
 		//lege neuen Customer in der DB an, gibt ID zurück wenn erfolgreich, FALSE wenn nicht
 		$customerid = $customer->register();
 
@@ -88,6 +87,7 @@
 			},
 			// wenn Button "submit" gedrückt wird, prüfe Adresse auf plausibilität
 			submitHandler: function(form) {
+			alert("Button gedrück");
 			var geocoder;
 			geocoder = new google.maps.Geocoder();
 			var address = document.getElementsByName('txt_plz')[0].value
@@ -136,5 +136,5 @@
 			<label for="txt_password">Passwort: </label> <br /> <input class="textfield" type="password" name="txt_password"
 				value="" /> <br />		
 
-			<input class="button" type="submit" name="btn_register" value="register" />		
+			<input class="button" type="submit" name="btn_register" value="registrieren" />	
 </form>

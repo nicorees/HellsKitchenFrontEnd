@@ -35,7 +35,7 @@
 			// wenn Button "submit" gedrückt wird, geb folgendes aus
 			submitHandler: function(form) {
 				alert("test");
-				//form.submit();
+				form.submit();
 			}
 		});
 	});

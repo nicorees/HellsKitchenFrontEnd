@@ -19,6 +19,7 @@
 		$product->setIngredients($id);
 		$product->setPrivate($private);
 		$product->setCustomerID($customerID);
+		$product->saveProduct();
 
 		echo "Name: ";
 		echo $product->getName();

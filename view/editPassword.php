@@ -22,13 +22,13 @@
 				// Passwörter = Pflichtfelder
 				txt_pw1: {
 					required: true,
-					minlength: 4,
+					minlength: 5,
 					maxlength: 10			
 				},
 
 				txt_pw2: {
 					required: true,
-					minlength: 4,
+					minlength: 5,
 					maxlength: 10,
 					equalTo: "#txt_pw1"
 				}
