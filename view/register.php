@@ -99,7 +99,7 @@
 				form.submit();
 			} else {
 			// Ort nicht gefunden, Fehlermeldung
-				alert("Bitte Prüfen Sie ihre Daten, Ort nicht gefunden!");
+				alert("Bitte prüfen Sie ihre Daten, Ort nicht gefunden!");
 			}
 			});
 			}
@@ -108,7 +108,7 @@
 
 </script>
 
-<form id="Formular" action="<?php URL_BASE . "/?p=register" ?>" method="post">		
+<form id="Formular" action="<?php URL_BASE . "?p=register" ?>" method="post">		
 
 			<label for="txt_vorname">Vorname: </label><br /> <input class="textfield" type="text"
 				name="txt_vorname" value="" /> <br />
