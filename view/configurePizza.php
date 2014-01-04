@@ -4,7 +4,7 @@ $ingredients = Ingredient::getAllIngredients();
 
 ?>
 
-<form action=".?p=generateProduct" method="post">
+<form action="?c=generateProduct" method="post">
 	<table id="Ingredients" class="table striped slim">
 		<thead>
 			<tr>

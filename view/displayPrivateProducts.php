@@ -31,19 +31,17 @@ if(empty($products)){
 	else{
 ?>
 
-	<table id="products">
+	<table id="products" class="table striped">
 		<thead>
 			<tr>
-				<th>Product Name</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>Ingredients</th>
-				<th>Public?</th>
-			
+				<th>Name</th>
+				<th>Preis</th>
+				<th>Beschreibung</th>
+				<th>Zutaten</th>
+				<th>Veröffentlicht</th>			
 			</tr>
 		</thead>
 		<tbody>
-			
 			<?php foreach ($products as $p){ ?>
 			<tr>
 				<td><?php echo $p->getName(); ?></td>
@@ -53,26 +51,22 @@ if(empty($products)){
 					<?php 
 						foreach ($p->getIngredients() as $i) {
 							$ingredient = new Ingredient($i);
-							echo $ingredient->getName();
+							echo "" . $ingredient->getName() . " ";
 						}
 					?>
 				</td>
-				<td> <?php  
-						// private or not? - set the right combination of radiobuttons
-						$private = $p->getPrivate();
-
-						if($private == '0'){
-
-						echo 'ja: <input onclick="update(this.name+this.value);" type="radio" checked ="checked"  name="private'.$p->getID().'" value="0" /> nein: <input onclick="update(this.name+this.value);" type="radio" name="private'.$p->getID().'" value="1" /> ';
-
-						} else {
-
-						echo 'ja: <input onclick="update(this.name+this.value);" type="radio"   name="private'.$p->getID().'" value="0" /> nein: <input onclick="update(this.name+this.value);" type="radio" checked ="checked" name="private'.$p->getID().'" value="1" /> ';
-
-						}
-					
-
-						?> </td>
+				<td>
+					<?php 
+						if ($p->getPrivate())
+							echo "Nein <i class='icon-locked'></i>";
+						else
+							echo "Ja <i class='icon-unlocked'></i>";
+					?>
+					<br/>
+					<a href='<?php echo '?c=changeProductVisibility&pid=' . $p->getId() ; ?>' class='fg-crimson'>
+        				&aumlndern
+					</a>
+				</td>
 				
 			</tr>
 			<?php } ?>

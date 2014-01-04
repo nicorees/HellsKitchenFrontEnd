@@ -34,7 +34,9 @@ class System {
 
 	private $controllers = array(
 			"cartRemove",
-			"cartAdd"
+			"cartAdd",
+			"generateProduct",
+			"changeProductVisibility"
 	);
 
 	public function __construct() {

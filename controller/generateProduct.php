@@ -1,5 +1,5 @@
 <?php
-	if(isset($_POST['bnt_bestellen'])){
+	if(isset($_POST['bnt_bestellen'])) {
 		
 		// erzeuge neues Produkt
 		$product = new Product();
@@ -19,24 +19,12 @@
 		$product->setIngredients($id);
 		$product->setPrivate($private);
 		$product->setCustomerID($customerID);
-
-		//$product->save();
-
-		echo "Name: ";
-		echo $product->getName();
-		echo '<br />';
-		echo "Preis: ";
-		echo $product->getPrice();
-		echo '<br />';
-		echo "Öffentlich: ";
-		echo $product->getPrivate();
-		echo '<br />';
-		echo "Erstellt durch: ";
-		echo $product->getCustomerID();
-		echo '<br />';
-		echo "<pre>";
-		print_r($product->getIngredients());
-		echo "</pre>";
-}
-
+		
+		if($product->saveProduct())
+			header("Location: " . URL_BASE . "?p=displayPrivateProducts");
+		else {
+		// SET ERROR MESSAGE
+		header("Location: " . URL_BASE);
+		}
+	}
 ?>

@@ -12,7 +12,7 @@ class Menubuilder {
 		"Pizzen" => array(
 			"Pizza Erstellen" => "?p=configurePizza",
 			"Meine Pizzen" => "?p=displayPrivateProducts",
-			"Standard Pizzen" => "?p=displayAllProducts",
+			"Alle Pizzen" => "?p=displayAllProducts",
 			),
 		"Bestellungen" => array(
 			"Warenkorb" => "?p=cart",

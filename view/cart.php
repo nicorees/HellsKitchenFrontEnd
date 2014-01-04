@@ -16,7 +16,16 @@ $cart = Order::getCart($_SESSION['customerID']);
 			<?php foreach ($cart->getOrderLines() as $orderline): ?>
 				<?php $p = new Product($orderline->getProductID()); ?>
 				<tr>
-					<td><?php echo "IMG"; ?></td>
+					<td>
+						<img width="100px" height="100px" src=
+							<?php
+								if (file_exists(DOC_ROOT . "assets/img/pizza/" . $p->getID() . ".jpg"))
+									echo "assets/img/pizza/" . $p->getID() . ".jpg";
+								else
+									echo "assets/img/pizza/default.jpg";
+							?>
+						>
+					</td>
 					<td><?php echo $p->getName(); ?></td>
 					<td><?php echo $orderline->getPrice(); ?></td>
 					<td><?php echo $orderline->getQuantity(); ?></td>

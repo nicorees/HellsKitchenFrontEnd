@@ -41,7 +41,7 @@ echo "<h3>Welcome $first $last</h3>";
 	        <i class="icon-database"></i>
 	    </div>
 	    <div class="tile-status">
-	        <span class="name">Standard Pizzen</span>
+	        <span class="name">Alle Pizzen</span>
 	    </div>
 	</div>
 </a>
