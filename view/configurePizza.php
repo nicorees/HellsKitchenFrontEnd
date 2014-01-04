@@ -19,7 +19,7 @@ $ingredients = Ingredient::getAllIngredients();
 		<input class="textfield" type="text"name="txt_pizzaname" value="" />
 			<?php foreach ($ingredients as $i): ?>
 			<tr>
-				<td><img width="70px" height="70px" src=<?php  echo $i->getPicture(); ?> ></td>
+				<td><img width="70px" height="70px" src=<?php  echo "assets/img/ingredients/" . $i->getID() . ".jpg" ?> ></td>
 				<td><?php echo $i->getName(); ?></td>
 				<td><?php echo sprintf("%.2f",$i->getPrice()) ."€" ;?> </td>
 				<td class="short-column">

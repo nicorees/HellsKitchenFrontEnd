@@ -115,7 +115,6 @@ class Ingredient extends DB {
 		$this->price = (double) $this->ingredient->Price;
 		$this->available = (boolean) $this->ingredient->Available;
 		$this->ingredientID = (int) $this->ingredient->IngredientID;
-		$this->picture = $this->ingredient->Picture;
 	
 		return TRUE;
 	}

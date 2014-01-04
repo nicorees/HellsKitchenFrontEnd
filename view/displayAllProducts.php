@@ -6,6 +6,7 @@ $products = Product::getAllPublicAvailableProducts();
 	<table class="table striped">
 		<thead>
 			<tr>
+				<th class="text-left"></th>
 				<th class="text-left">Pizza Name</th>
 				<th class="text-left">Preis</th>
 				<th class="text-left">Beschreibung</th>
@@ -16,6 +17,14 @@ $products = Product::getAllPublicAvailableProducts();
 		<tbody>
 			<?php foreach ($products as $p): ?>
 			<tr>
+				<td><img width="100px" height="100px" src=
+					<?php
+						if (file_exists(DOC_ROOT . "assets/img/pizza/" . $p->getID() . ".jpg"))
+							echo "assets/img/pizza/" . $p->getID() . ".jpg";
+						else
+							echo "assets/img/pizza/default.jpg";
+					?> >
+				</td>
 				<td><?php echo $p->getName(); ?></td>
 				<td><?php echo $p->getPrice(); ?></td>
 				<td><?php echo $p->getDescription(); ?></td>

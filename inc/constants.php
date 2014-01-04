@@ -4,7 +4,7 @@
 define("DB_HOST", "localhost:3306");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB", "wfprj_15");
+define("DB", "wfprj_09");
 
 // database tables
 define("TABLE_ADDRESS", "address");

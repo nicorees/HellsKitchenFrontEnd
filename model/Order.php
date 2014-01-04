@@ -64,7 +64,26 @@ class Order extends DB {
 
 		$obj = $result->fetch_object();
 
+		if($obj == NULL) {
+			self::createCartForCustomer($customerID);
+			header("Location: " . URL_BASE . "?p=cart");
+		}
+
 		return new Order($obj->OrderID);
+	}
+
+	public static function createCartForCustomer($customerID) {
+		
+		$customer = new Customer($customerID);
+
+		$sql = sprintf("INSERT INTO `" . DB . "`.`" . TABLE_ORDERS . "`(CustomerID,StatusID,AddressID)
+			VALUES(%s,1,%s);",
+			mysql_real_escape_string($customer->getCustomerID()),
+			mysql_real_escape_string($customer->getAddressID()));
+		
+		$db = new DB();
+
+		$result = $db->doQuery($sql);
 	}
 
 	public static function removeFromCart($customerID, $productID) {

@@ -85,23 +85,6 @@
 					required: "Bitte geben Sie Ihren Wohnort ein!",
 					city: "Bitte keine Zahlen eingeben!"
 				}
-			},
-			// wenn Button "submit" gedrückt wird, prüfe Adresse auf plausibilität
-			submitHandler: function(form) {
-			var geocoder;
-			geocoder = new google.maps.Geocoder();
-			var address = document.getElementsByName('txt_plz')[0].value
-				+" "+ document.getElementsByName('txt_stadt')[0].value +
-				", " + document.getElementsByName('txt_strasse')[0].value;
-			geocoder.geocode( { 'address': address}, function(results, status) {
-			// Ort gefunden, sende Daten ab
-			if (status == google.maps.GeocoderStatus.OK) {
-				form.submit();
-			} else {
-			// Ort nicht gefunden, Fehlermeldung
-				alert("Bitte prüfen Sie ihre Daten, Ort nicht gefunden!");
-			}
-			});
 			}
 		});
 	});
