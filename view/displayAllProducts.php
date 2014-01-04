@@ -11,6 +11,7 @@ $products = Product::getAllPublicAvailableProducts();
 				<th class="text-left">Preis</th>
 				<th class="text-left">Beschreibung</th>
 				<th class="text-left">Zutaten</th>
+				<th class="text-left">Bewertung</th>
 				<th class="text-left">Bestellen</th>
 			</tr>
 		</thead>
@@ -42,6 +43,22 @@ $products = Product::getAllPublicAvailableProducts();
 						}
 					?>
 				</td>
+				<td>
+					<div class="rating small active fg-amber" style="height: auto;">
+						<ul>
+							<?php
+								for ($i=1; $i <= 5; $i++) {
+									$id = $p->getID();
+									if($i <= round($p->getRating()))
+										echo "<li class='rated' id='$id"."_"."$i' onclick='javascript:rate(this);'/>";
+									else
+										echo "<li id='$id"."_"."$i' onclick='javascript:rate(this);'/>";
+								}
+							?>
+						</ul>
+						<pre class="tertiary-text-secondary" style="text-align: center;">(<?php echo round($p->getRating(), 2); ?>)</pre>
+					</div>
+				</td>
 				<td class="short-column">
 					<div class="input-control checkbox" data-role="input-control">
 						<label>
@@ -59,8 +76,15 @@ $products = Product::getAllPublicAvailableProducts();
 
 <a href=".?p=chooseStatus">wähle deine Adresse, etc.</a>
 
+<script type="text/javascript">
 
-<?php 
-	//TEST
-	//var_dump($_SESSION['addressID'], $_SESSION['pickup']); 
-?>
+	function rate(element) {
+		var string = element.getAttribute('id').split('_');
+		var id = string[0];
+		var rating = string[1];
+		var url = "?c=rateProduct&i=" + id + "&r=" + rating;
+		
+		window.location.href = url;
+	}
+
+</script>

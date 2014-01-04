@@ -39,4 +39,4 @@
 		<div class="wrapper">
 			<div class="grid">
 				<div class="row">
-					<div class="span8">
+					<div class="span12">

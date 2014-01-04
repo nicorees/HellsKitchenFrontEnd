@@ -36,7 +36,8 @@ class System {
 			"cartRemove",
 			"cartAdd",
 			"generateProduct",
-			"changeProductVisibility"
+			"changeProductVisibility",
+			"rateProduct"
 	);
 
 	public function __construct() {

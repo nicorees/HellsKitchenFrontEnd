@@ -11,6 +11,7 @@ class Product extends DB {
 	private $available = NULL;
 	private $customerID = NULL;
 	private $private = NULL;
+	private $rating = 0;
 
 	private $ingredients = array();
 	
@@ -89,6 +90,7 @@ class Product extends DB {
 		$this->price = (double) $this->product->ProductPrice;
 		$this->description = $this->product->Description;
 		$this->private = $this->product->Private;
+		$this->rating = @($this->product->SumOfRating / $this->product->NumOfRater);
 
 		$this->setAvailable( (boolean)$this->product->Available );
 		
@@ -218,6 +220,19 @@ class Product extends DB {
 				
 		return $db->doQuery($sql);
 	}
+
+		public static function rateProduct($productID, $rating) {
+		
+		$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_PRODUCT . "` 
+			SET `NumOfRater` = NumOfRater + 1, `SumOfRating` = SumOfRating + %s
+			WHERE `ProductID` = '%s';",
+			mysql_real_escape_string($rating),
+			mysql_real_escape_string($productID));
+		
+		$db = new DB();
+
+		return $db->doQuery($sql);
+	}
 	
 	/*
 	 * getter und setter
@@ -285,6 +300,14 @@ class Product extends DB {
 
 	public function setPrivate($private) {
 		$this->private = $private;
+	}
+
+	public function getRating() {
+		return $this->rating;
+	}
+
+	public function setRating($rating) {
+		$this->rating = $rating;
 	}
 }
 
