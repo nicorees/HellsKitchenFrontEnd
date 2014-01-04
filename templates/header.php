@@ -24,6 +24,9 @@
 	<?php echo JS::get("metro/metro-stepper.js"); ?> 	
 	<!-- End of Metro UI JavaScript plugins -->
 
+	<link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
 	<title>HELLS KITCHEN - BEST PIZZAS IN TOWN</title>
 	
 	</head>
@@ -32,7 +35,12 @@
 		<header class="bg-dark">
 			<nav class="navigation-bar fixed-top dark">
 				<div class="navigation-bar-content container">
-						<?php Menubuilder::buildMenu(); ?>
+						<?php
+							if(isset($_SESSION['customerID']))
+								Menubuilder::buildAuthMenu();
+							else
+								Menubuilder::buildUnAuthMenu();
+						?>
 				</div>
 			</nav>
 		</header>

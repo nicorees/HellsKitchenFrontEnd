@@ -14,6 +14,7 @@ class System {
 	private $pages_unauth = array(
 			"register",
 			"login",
+			"displayAllProductsUnAuth"
 	);
 
 	private $pages_auth = array(

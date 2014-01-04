@@ -35,9 +35,9 @@ class Menubuilder {
 	/*
 	 * Iteriert über das obige Array und baut so das Menü auf.
 	 * Wenn ein $value der $key => $value Assoziation ein Array ist,
-	 * baut die Funktion ein weiteres Submenü.
+	 * baut die Funktion ein Dropdown-Submenü.
 	 */
-	public static function buildMenu() {
+	public static function buildAuthMenu() {
 
 		foreach (self::$menulinks as $level1 => $level2) {
 			
@@ -79,6 +79,16 @@ class Menubuilder {
 
 			print("</div>");
 		}	
+	}
+
+	/*
+	 * Baut das Menü für nicht authentifizierte Benutzer auf.
+	 * Dies beinhaltet lediglich den Home- und einen Registierungs-Link
+	 */
+	public static function buildUnAuthMenu() {
+		print("<div class='element'><a class='fg-white' href='?p=welcome'>Anmelden</a></div>");
+		print("<div class='element'><a class='fg-white' href='?p=register'>Registrieren</a></div>");
+		print("<div class='element'><a class='fg-white' href='?p=displayAllProductsUnAuth'>Pizzen</a></div>");
 	}	
 }
 // end of Menubuilder.php

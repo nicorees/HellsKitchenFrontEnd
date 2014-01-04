@@ -9,3 +9,7 @@
 table .short-column {
 	width: 5px;
 }
+
+.navigation-bar-content .element {
+	margin-left: 30px;
+}
