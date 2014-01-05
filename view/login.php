@@ -16,7 +16,7 @@
 		}
 	}	
 ?>
-<p>Login:</p>
+<h3>Login:</h3>
 <form action="" method="post">
 	<p>
 	Email: <br />
@@ -29,4 +29,4 @@
 	<input class="button" type="submit" name="btn_login"
 	value="Login" />
 </form>
-Noch kein Benutzer? - Registriere dich jetzt <a href=".?p=register">hier!</a>
+<p> Noch kein Benutzer? - <a href=".?p=register">Registriere dich jetzt!</a></p>

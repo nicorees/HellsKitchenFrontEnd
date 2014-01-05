@@ -1,17 +1,19 @@
 <?php
-$products = Product::getAllPublicAvailableProducts();
+	$products = Product::getAllPublicAvailableProducts();
 ?>
 
+<h1>Alle Pizzen</h1>
+<br/>
 <form action="?c=cartAdd" method="post">
 	<table class="table striped">
 		<thead>
 			<tr>
 				<th class="text-left"></th>
 				<th class="text-left">Pizza Name</th>
-				<th class="text-left">Preis</th>
 				<th class="text-left">Beschreibung</th>
 				<th class="text-left">Zutaten</th>
 				<th class="text-left">Bewertung</th>
+				<th class="text-left">Preis</th>
 				<th class="text-left">Bestellen</th>
 			</tr>
 		</thead>
@@ -29,7 +31,6 @@ $products = Product::getAllPublicAvailableProducts();
 					>
 				</td>
 				<td><?php echo $p->getName(); ?></td>
-				<td><?php echo $p->getPrice(); ?></td>
 				<td><?php echo $p->getDescription(); ?></td>
 				<td>
 					<?php
@@ -59,6 +60,7 @@ $products = Product::getAllPublicAvailableProducts();
 						<pre class="tertiary-text-secondary" style="text-align: center;">(<?php echo round($p->getRating(), 2); ?>)</pre>
 					</div>
 				</td>
+				<td>€ <?php echo $p->getPrice(); ?></td>
 				<td class="short-column">
 					<div class="input-control checkbox" data-role="input-control">
 						<label>
@@ -71,10 +73,8 @@ $products = Product::getAllPublicAvailableProducts();
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	<input type="submit" id="submit" name="submit" value="bestellen" />
+	<input type="submit" id="submit" name="submit" value="Zum Warenkorb hinzufügen" />
 </form>
-
-<a href=".?p=chooseStatus">wähle deine Adresse, etc.</a>
 
 <script type="text/javascript">
 

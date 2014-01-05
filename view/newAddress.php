@@ -1,3 +1,49 @@
+<?php	
+
+	if(isset($_POST['txt_strasse'])) {
+
+		if(!empty($_POST['txt_strasse']) && !empty($_POST['txt_plz']) && !empty($_POST['txt_stadt'])) {
+		
+			$customer = new Customer($_SESSION["customerID"]);
+
+			//setze alle Instanzvariablen für eine Adresse
+			$customer->setStreet($_POST['txt_strasse']);
+			$customer->setZip($_POST['txt_plz']);
+			$customer->setCity($_POST['txt_stadt']);
+
+			// neue Addresse hinzufügen
+			if($customer->insertNewAddress()) {
+				echo '
+					<script>
+						alert("Die neue Adresse wurde hinzugefügt!");
+					</script>
+					';
+			} else {
+				echo '<script>alert("Es trat ein Fehler auf, bitte versuche es erneut!")</script>';
+			}	
+		}
+		else {
+				echo 'Alle Felder müssen ausgefüllt sein.';
+		}
+	}
+?>
+
+<h3>Hier kannst du eine neue Adresse anlegen:</h3>
+
+<form id="Formular" action="<?php URL_BASE . "/?p=newAddress" ?>" method="post">	
+			<label for="txt_strasse">Straße: </label> 
+			<input class="textfield" type="text" name="txt_strasse" value="" /> <br />
+
+			<label for="txt_plz">PLZ: </label>
+			<input class="textfield" type="text" name="txt_plz" value="" /> <br />
+
+			<label for="txt_stadt">Stadt: </label>
+			<input class="textfield" type="text" name="txt_stadt" value="" /> <br /> <br />
+			
+			<input class="button" type="submit" name="btn_save" value="Adresse anlegen" />
+			<a href="javascript:history.back()" class="button">Zurück</a>
+</form>
+
 <style type="text/css">
 	label.error { 
 	    color: #fff; 
@@ -65,7 +111,6 @@
 			geocoder.geocode( { 'address': address}, function(results, status) {
 			// Ort gefunden, sende Daten ab
 			if (status == google.maps.GeocoderStatus.OK) {
-				alert("ok...");
 				form.submit();
 			} else {
 			// Ort nicht gefunden, Fehlermeldung
@@ -77,46 +122,3 @@
 	});
 
 </script>
-
-<?php	
-
-	if(isset($_POST['txt_strasse'])) {
-
-		if(!empty($_POST['txt_strasse']) && !empty($_POST['txt_plz']) && !empty($_POST['txt_stadt'])) {
-		
-			$customer = new Customer($_SESSION["customerID"]);
-
-			//setze alle Instanzvariablen für eine Adresse
-			$customer->setStreet($_POST['txt_strasse']);
-			$customer->setZip($_POST['txt_plz']);
-			$customer->setCity($_POST['txt_stadt']);
-
-			// neue Addresse hinzufügen
-			if($customer->insertNewAddress()) {
-				echo '<script>alert("Deine Adresse wurde hinzugefügt!")</script>';
-			} else {
-				echo '<script>alert("Es trat ein Fehler auf, bitte versuche es erneut!")</script>';
-			}	
-		}
-		else {
-				echo 'Alle Felder müssen ausgefüllt sein.';
-		}
-	}
-?>
-
-<p>Hier kannst du deine neue Adresse angeben:</p> <br/>
-
-<form id="Formular" action="<?php URL_BASE . "/?p=newAddress" ?>" method="post">	
-			<label for="txt_strasse">Straße: </label> 
-			<input class="textfield" type="text" name="txt_strasse" value="" /> <br />
-
-			<label for="txt_plz">PLZ: </label>
-			<input class="textfield" type="text" name="txt_plz" value="" /> <br />
-
-			<label for="txt_stadt">Stadt: </label>
-			<input class="textfield" type="text" name="txt_stadt" value="" /> <br /> <br />
-			
-			<input class="button" type="submit" name="btn_save" value="speichern" />			
-</form> 
-
-<a href=".?p=editData" class="button" style="float: right;">zurück</a>

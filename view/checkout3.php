@@ -2,22 +2,19 @@
 	$cart = Order::getCart($_SESSION['customerID']);
 	
 	if(empty($cart->getOrderLines())) {
-		
-		echo "
-			<p class='readable-text'>Dein Warenkorb ist derzeit leer</p>
-			<p>
-				Durchst&oumlbere doch unser  
-				<a href='.?p=displayAllProducts'>Angebot</a>
-				, dort wirst du sicherlich fündig!
-			</p>		
-		";
-		
-		exit;
+		header("Location: .");
 	}
+
+	$orderTime = (empty($_SESSION['orderTime']) ? date('m/d/Y h:i:s A') : $_SESSION['orderTime'] );
+	$pickup = (isset($_POST['pickup']) ? TRUE : FALSE );
+	$addressID = $_POST['dropdown'];
+
+	$cart->prepareCheckout($orderTime,$pickup,$addressID);
 ?>
 
-<h1>Warenkorb</h1>
+<h2>Schritt3: Zusammenfassung</h2>
 <br/>
+
 <table class="table striped">
 	<thead>
 		<tr>
@@ -25,7 +22,7 @@
 			<th class="text-left">Pizza Name</th>
 			<th class="text-left">Preis</th>
 			<th class="text-left">Anzahl</th>
-			<th class="text-left"></th>
+			<th class="text-left">Gesamt</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,14 +42,15 @@
 				<td><?php echo $p->getName(); ?></td>
 				<td>€ <?php echo $orderline->getPrice(); ?></td>
 				<td><?php echo $orderline->getQuantity(); ?></td>
-				<td>
-					<a href='<?php echo '?c=cartRemove&pid=' . $p->getId() ; ?>' class='fg-crimson'>
-        				<i class="icon-cancel-2"></i>
-					</a>
-				</td>
+				<td>€ <?php echo ($orderline->getPrice()*$orderline->getQuantity()) ?></td>
 			</tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
 
-<a href="?p=checkout1" class="button" >Bestellen</a>
+<h3>Zwischensumme: € <?php echo $cart->getTotalPrice(); ?></h3>
+<h3>Lieferkosten: € <?php echo $cart->getDeliveryCosts(); ?></h3>
+<h3>Gesamtsumme: € <?php echo ($cart->getTotalPrice() + $cart->getDeliveryCosts()); ?></h3>
+<br/>
+
+<a href="?c=checkout" class="button">Bestellung abschließen</a>

@@ -11,6 +11,7 @@ class Order extends DB {
 	private $time = NULL;
 	private $pickup = NULL;
 	private $addressID = NULL;
+	private $deliveryCosts = 0;
 
 	private $statusText = NULL;
 	private $orderLines = array();
@@ -43,9 +44,33 @@ class Order extends DB {
 		$this->setTime($this->order->Time);
 		$this->setPickup($this->order->Pickup);
 		$this->setAddressID($this->order->AddressID);
+		$this->setDeliveryCosts($this->order->DeliveryCosts);
 
 		$this->setStatusText();
 		$this->setOrderLines();
+	}
+
+	public function prepareCheckout($orderTime,$pickup,$addressID) {
+
+		$this->setTime(date("Y-m-d H:i:s", strtotime($orderTime)));
+		$this->setPickup($pickup);
+		$this->setAddressID($addressID);
+
+		$totalPrice = 0;
+
+		foreach ($this->getOrderLines() as $j => $orderline) {
+			$totalPrice += ( $orderline->getPrice() * $orderline->getQuantity() ) ;
+		}
+
+		$this->setTotalPrice($totalPrice);
+
+		$deliveryCosts = Address::calculateDeliveryCosts($addressID);
+
+		if (!$deliveryCosts) return FALSE;
+
+		$this->setDeliveryCosts($deliveryCosts);
+
+		return $this->save();
 	}
 
 	public static function getCart($customerID) {
@@ -70,6 +95,27 @@ class Order extends DB {
 		}
 
 		return new Order($obj->OrderID);
+	}
+
+	public function save() {
+
+		$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_ORDERS . "` 
+			SET `StatusID`='%s',
+			`TotalPrice`='%s',
+			`Time`='%s',
+			`Pickup`='%s',
+			`AddressID`='%s',
+			`DeliveryCosts`='%s'
+			WHERE `OrderID`='%s';",
+			mysql_real_escape_string($this->getStatusID()),
+			mysql_real_escape_string($this->getTotalPrice()),
+			mysql_real_escape_string($this->getTime()),
+			mysql_real_escape_string($this->getPickup()),
+			mysql_real_escape_string($this->getAddressID()),
+			mysql_real_escape_string($this->getDeliveryCosts()),
+			mysql_real_escape_string($this->getOrderID()));
+
+		return $this->doQuery($sql);
 	}
 
 	public static function createCartForCustomer($customerID) {
@@ -182,6 +228,35 @@ class Order extends DB {
 	}
 
 	/*
+	 * gibt ein Array mit allen getätigten Bestellungen zurück:
+	 * 
+	 * @return Array mit Bestellungen
+	 *         FALSE, wenn keine Bestellungen geladen werden konnte
+	*/
+	public static function getAllOrders($customerID) {
+		// DB Referenz erstellen
+		$db = new parent;
+		
+		$sql = sprintf("SELECT * FROM `" . DB . "`.`" . TABLE_ORDERS . "`
+		WHERE `CustomerID` = '%s'
+		AND `StatusID` <> '1'",
+		mysql_real_escape_string($customerID));
+		
+		$result = $db->doQuery($sql);
+		
+		if ( ! $result ) return FALSE;
+		
+		$orderArray = array();
+		
+		while ($row = $result->fetch_object()) {
+			$order = new Order($row->OrderID);
+			$orderArray[] = $order;
+		}
+
+		return $orderArray;
+	}
+
+	/*
 	 * GETTER UND SETTER
 	 */
 	public function getOrderID() {
@@ -273,6 +348,14 @@ class Order extends DB {
 		
 		while($row = $result->fetch_object())
 			array_push($this->orderLines, new Orderline($row->OrderID, $row->ProductID));
+	}
+
+	public function setDeliveryCosts($deliveryCosts) {
+		$this->deliveryCosts = $deliveryCosts;
+	}
+
+	public function getDeliveryCosts() {
+		return $this->deliveryCosts;
 	}
 
 }

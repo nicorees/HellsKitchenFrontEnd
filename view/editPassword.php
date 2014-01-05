@@ -1,3 +1,64 @@
+<?php
+
+	$customer = new Customer($_SESSION["customerID"]);
+
+	if(isset($_POST['btn_edit']) && !empty($_POST['btn_edit'])) {
+		$pw0 = md5($_POST['txt_pw0']);
+		$pw1 = md5($_POST['txt_pw1']);
+		$pw2 = md5($_POST['txt_pw2']);
+
+
+		// alle Felder müssen gefüllt sein
+		if(!empty($_POST['txt_pw0']) && !empty($_POST['txt_pw1'])
+		   && !empty($_POST['txt_pw2'])) {
+
+			// altes Passwort abfragen
+			$db = new DB();
+			$sql = "SELECT Password FROM `" . DB . "`.`" . TABLE_CUSTOMER . "` 
+					WHERE CustomerID = '" . $_SESSION["customerID"] . "' LIMIT 1;";
+			$result = $db->doQuery($sql);
+			$pwOld = $result->fetch_object()->Password;
+
+
+			// das alte Passwort muss korrekt sein
+			if($pwOld == $pw0) {
+				$customer->setPassword($_POST['txt_pw1']);
+
+				if($customer->savePassword()) {
+					echo 'Dein Passwort wurde wie gewünscht aktualisiert.<br/><br/>';
+
+				} else {
+					echo 'Es trat ein Fehler auf, bitte versuche es erneut.<br/><br/>';
+				}
+			}
+			else {
+				echo 'Dein altes Passwort ist nicht korrekt!<br/><br/>';
+			}	
+		}
+		else {
+			echo 'Bitte alle Felder ausfüllen.<br/><br/>';
+		}
+	}	
+
+?>
+
+<h3>Hier kannst du dein Passwort ändern:</h3>
+<br/>
+	
+<form id="Formular" action="?p=editPassword" method="post">
+	<label for="txt_pw0">Altes Passwort: </label>
+	<input class="textfield" type="password" name="txt_pw0" value="" /> <br/>
+
+	<label for="txt_pw1">Neues Passwort: </label>
+	<input id="txt_pw1" class="textfield" type="password" name="txt_pw1" value="" /> <br/>
+
+	<label for="txt_pw2">Neues Passwort wiederholen: </label>
+	<input class="textfield" type="password" name="txt_pw2" value="" /> <br/> <br/>
+
+	<input class="button" type="submit" name="btn_edit" value="Speichern" />
+	<a href="javascript:history.back()" class="button" >Zurück</a>
+</form>
+
 <style type="text/css">
 	label.error { 
 	    color: #fff; 
@@ -57,62 +118,3 @@
 	});
 
 </script>
-
-<?php
-
-	$customer = new Customer($_SESSION["customerID"]);
-
-	if(isset($_POST['btn_edit']) && !empty($_POST['btn_edit'])) {
-		$pw0 = md5($_POST['txt_pw0']);
-		$pw1 = md5($_POST['txt_pw1']);
-		$pw2 = md5($_POST['txt_pw2']);
-
-
-		// alle Felder müssen gefüllt sein
-		if(!empty($_POST['txt_pw0']) && !empty($_POST['txt_pw1'])
-		   && !empty($_POST['txt_pw2'])) {
-
-			// altes Passwort abfragen
-			$db = new DB();
-			$sql = "SELECT Password FROM `" . DB . "`.`" . TABLE_CUSTOMER . "` 
-					WHERE CustomerID = '" . $_SESSION["customerID"] . "' LIMIT 1;";
-			$result = $db->doQuery($sql);
-			$pwOld = $result->fetch_object()->Password;
-
-
-			// das alte Passwort muss korrekt sein
-			if($pwOld == $pw0) {
-				$customer->setPassword($_POST['txt_pw1']);
-
-				if($customer->savePassword()) {
-					echo 'Dein Passwort wurde wie gewünscht aktualisiert.<br/><br/>';
-
-				} else {
-					echo 'Es trat ein Fehler auf, bitte versuche es erneut.<br/><br/>';
-				}
-			}
-			else {
-				echo 'Dein altes Passwort ist nicht korrekt!<br/><br/>';
-			}	
-		}
-		else {
-			echo 'Bitte alle Felder ausfüllen.<br/><br/>';
-		}
-	}	
-
-?>
-	<p>Hier kannst du dein Passwort ändern:</p> <br/>
-		
-	<form id="Formular" action="?p=editPassword" method="post">
-		<label for="txt_pw0">Altes Passwort: </label>
-		<input class="textfield" type="password" name="txt_pw0" value="" /> <br/>
-
-		<label for="txt_pw1">Neues Passwort: </label>
-		<input id="txt_pw1" class="textfield" type="password" name="txt_pw1" value="" /> <br/>
-
-		<label for="txt_pw2">Wiederholung des neuen Passwortes: </label>
-		<input class="textfield" type="password" name="txt_pw2" value="" /> <br/> <br/>
-
-		<input class="button" type="submit" name="btn_edit" value="ändern" />
-		<a href=".?p=edit" class="button" >zurück</a>
-	</form>

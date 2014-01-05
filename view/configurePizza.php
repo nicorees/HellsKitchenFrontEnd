@@ -3,7 +3,8 @@
 $ingredients = Ingredient::getAllIngredients();
 
 ?>
-
+<h1>Erstelle deine eigene Pizza!</h1>
+<br/>
 <form action="?c=generateProduct" method="post">
 	<table id="Ingredients" class="table striped slim">
 		<thead>
@@ -15,8 +16,8 @@ $ingredients = Ingredient::getAllIngredients();
 			</tr>
 		</thead>
 		<tbody>
-		<p> Name der Pizza </p>
-		<input class="textfield" type="text"name="txt_pizzaname" value="" />
+		<p>Name der Pizza</p>
+		<input class="textfield" type="text" name="txt_pizzaname" value="" style="width: 400px;	" />
 			<?php foreach ($ingredients as $i): ?>
 			<tr>
 				<td><img width="70px" height="70px" src=<?php  echo "assets/img/ingredients/" . $i->getID() . ".jpg" ?> ></td>

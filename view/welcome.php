@@ -11,14 +11,15 @@ $user = $db->doQuery($sql)->fetch_object();
 $first = $user->firstname;
 $last = $user->lastname;
 
-echo "<h3>Welcome $first $last</h3>";
+echo "<h2>Hallo $first! Was möchtest du tun?</h2>";
+echo "<br/>";
 
 ?>
 <div class="span8">
 	<a href='?p=configurePizza'>
-		<div class="tile double bg-orange">
+		<div class="tile double bg-crimson">
 		    <div class="tile-content icon">
-		        <i class="icon-wrench"></i>
+		        <i class="icon-fire"></i>
 		    </div>
 		    <div class="tile-status">
 		        <span class="name">Pizza Erstellen</span>
@@ -36,7 +37,7 @@ echo "<h3>Welcome $first $last</h3>";
 		</div>
 	</a>
 	<a href='?p=displayAllProducts'>
-		<div class="tile bg-crimson">
+		<div class="tile bg-orange">
 		    <div class="tile-content icon">
 		        <i class="icon-database"></i>
 		    </div>
@@ -55,7 +56,7 @@ echo "<h3>Welcome $first $last</h3>";
 	    </div>
 	</div>
 	</a>
-	<a href='#'>
+	<a href='?p=displayAllOrders'>
 		<div class="tile bg-orange">
 		    <div class="tile-content icon">
 		        <i class="icon-layers"></i>
@@ -95,13 +96,13 @@ echo "<h3>Welcome $first $last</h3>";
 		    </div>
 		</div>
 	</a>
-	<a href='http://github.com'>
-		<div class="tile bg-orange">
+	<a href='?p=logout'>
+		<div class="tile bg-dark">
 		    <div class="tile-content icon">
-		        <i class="icon-github-6"></i>
+		        <i class="icon-reply"></i>
 		    </div>
 		    <div class="tile-status">
-		        <span class="name">Whatever</span>
+		        <span class="name">Abmelden</span>
 		    </div>
 		</div>
 	</a>

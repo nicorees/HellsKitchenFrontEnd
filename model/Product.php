@@ -87,7 +87,7 @@ class Product extends DB {
 		
 		$this->productID = $this->product->ProductID;
 		$this->name = $this->product->ProductName;
-		$this->price = (double) $this->product->ProductPrice;
+		$this->setPrice((double) $this->product->ProductPrice);
 		$this->description = $this->product->Description;
 		$this->private = $this->product->Private;
 		$this->rating = @($this->product->SumOfRating / $this->product->NumOfRater);
@@ -259,6 +259,12 @@ class Product extends DB {
 	}
 
 	public function setPrice($price) {
+		foreach ($this->ingredients as $ing) {
+			$ingredient = new Ingredient($ing);
+
+			$price += $ingredient->getPrice();
+		}
+
 		$this->price = $price;
 	}
 	

@@ -19,7 +19,6 @@ class System {
 
 	private $pages_auth = array(
 			"welcome",
-			"edit",
 			"editData",
 			"editEMail",
 			"editPassword",
@@ -30,7 +29,11 @@ class System {
 			"displayPrivateProducts",	
 			"newAddress",
 			"chooseStatus",
-			"cart"
+			"cart",
+			"checkout1",
+			"checkout2",
+			"checkout3",
+			"displayAllOrders"
 	);
 
 	private $controllers = array(
@@ -38,7 +41,8 @@ class System {
 			"cartAdd",
 			"generateProduct",
 			"changeProductVisibility",
-			"rateProduct"
+			"rateProduct",
+			"checkout"
 	);
 
 	public function __construct() {

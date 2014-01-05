@@ -24,6 +24,7 @@ class Menubuilder {
 				"Email Addresse ändern" => "?p=editEMail",
 				"Passwort ändern" => "?p=editPassword"
 				),
+			"Warenkorb" => "?p=cart",
 			"Abmelden" => "?p=logout"
 			),
 	);

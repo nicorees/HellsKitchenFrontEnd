@@ -1,3 +1,40 @@
+<?php
+
+	$customer = new Customer($_SESSION["customerID"]);
+
+	if(isset($_POST['btn_edit']) && !empty($_POST['btn_edit'])) {
+		
+		// es muss eine E-Mail Adresse angegeben sein 
+		if(!empty($_POST['txt_email'])) {
+	
+			$customer->setEmailAddress($_POST['txt_email']);
+			
+			if($customer->saveEMail()) {
+				echo 'Deine E-Mail Adresse wurde wie gewünscht aktualisiert.<br/><br/>';
+			} else {
+				echo 'Es trat ein Fehler auf, bitte versuche es erneut.<br/><br/>';
+			}	
+		}	
+		else {
+			echo 'Es wurde keine E-Mail Adresse eingegeben. Bitte eintragen.<br/><br/>';
+		}
+	}	
+
+?>
+
+<h3>Hier kannst du deine E-Mail Adresse aktualisieren:</h3>
+<br/>
+	
+<form id="Formular" action="?p=editEMail" method="post">	
+	
+	<label for="txt_email">E-Mail Adresse: </label> 
+	<input class="textfield" type="text" name="txt_email" value="<?php echo $customer->getEmailAddress(); ?>" />
+	<br/><br/>
+	<input id="submit" class="button" type="submit" name="btn_edit" value="Speichern"/>	
+	<a href="javascript:history.back()" class="button">Zurück</a>
+
+</form>
+
 <style type="text/css">
 	label.error { 
 	    color: #fff; 
@@ -6,10 +43,6 @@
 	    -moz-border-radius: 4px;
 	    -webkit-border-radius: 4px;
 	}	
-	input{
-	float:left;
-	}
-	#submit { margin-left: 5em; }	
 </style>
 
 <!-- Eigene Implementierung zum Überprüfen vom Formular  -->
@@ -40,37 +73,3 @@
 	});
 
 </script>
-
-<?php
-
-	$customer = new Customer($_SESSION["customerID"]);
-
-	if(isset($_POST['btn_edit']) && !empty($_POST['btn_edit'])) {
-		
-		// es muss eine E-Mail Adresse angegeben sein 
-		if(!empty($_POST['txt_email'])) {
-	
-			$customer->setEmailAddress($_POST['txt_email']);
-			
-			if($customer->saveEMail()) {
-				echo 'Deine E-Mail Adresse wurde wie gewünscht aktualisiert.<br/><br/>';
-			} else {
-				echo 'Es trat ein Fehler auf, bitte versuche es erneut.<br/><br/>';
-			}	
-		}	
-		else {
-			echo 'Es wurde keine E-Mail Adresse eingegeben. Bitte eintragen.<br/><br/>';
-		}
-	}	
-
-?>
-	<p>Hier kannst du deine E-Mail Adresse ändern:</p> <br/>
-		
-	<form id="Formular" action="?p=editEMail" method="post">	
-		
-		<label for="txt_email">E-Mail Adresse: </label> 
-		<input class="textfield" type="text" name="txt_email" value="<?php echo $customer->getEmailAddress(); ?>" />
-
-		<input id="submit" class="button" type="submit" name="btn_edit" value="ändern" />	
-		<a href=".?p=edit" class="button">zurück</a>
-	</form>

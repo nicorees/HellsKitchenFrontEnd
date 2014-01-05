@@ -3,33 +3,20 @@ $customer = new Customer($_SESSION["customerID"]);
 // fehlt noch: letztes bestelldatum der privaten pizza anzeigen --> evtl model ORDER einfügen?
 $products = Product::getCustomerProducts($customer->getCustomerID());
 
-?>
-
-
-<script language="JavaScript"> 
-/* output of alert: private+id of product+value of radiobutton
-* eg: private71 means: product number 7 was changed to status 1 
-* status 0 : public
-* status 1 : private
-* TODO: no ouput on screen: update database, so customer can change their privatestatus
-*/ 
-	function update(val) {
-    	alert("Radio button changed to " + val);
-	} 
-</script>
-
-<?php
 if(empty($products)){
 
 	echo "<span class='readable-text'>
-			Schade, du hast noch keine eigene Pizza erstellt, 
-			aber du kannst den 
+			Du hast noch keine eigene Pizza erstellt, 
+			aber du kannst jederzeit mit dem
 			<a href='.?p=configurePizza'>PizzaKonfigurator</a> 
-			wählen um eine zu kreieren!
+			eine zu kreieren!
 		</span>";
 }
 	else{
 ?>
+
+	<h1>Deine Pizzen</h1>
+	<br/>
 
 	<table id="products" class="table striped">
 		<thead>
@@ -73,8 +60,6 @@ if(empty($products)){
 		</tbody>
 	</table>
 	
-
-
 <?php
 	}
 ?>
