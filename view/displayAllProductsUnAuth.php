@@ -2,6 +2,8 @@
 $products = Product::getAllPublicAvailableProducts();
 ?>
 
+<h1>Alle Pizzen im Angebot</h1>
+<br/>
 <table class="table striped">
 	<thead>
 		<tr>

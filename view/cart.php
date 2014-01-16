@@ -7,7 +7,7 @@
 			<p class='readable-text'>Dein Warenkorb ist derzeit leer</p>
 			<p>
 				Durchst&oumlbere doch unser  
-				<a href='.?p=displayAllProducts'>Angebot</a>
+				<a href='.?p=displayAllProducts'>Angebot an Pizzen</a>
 				, dort wirst du sicherlich fündig!
 			</p>		
 		";

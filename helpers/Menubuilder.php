@@ -16,7 +16,7 @@ class Menubuilder {
 			),
 		"Bestellungen" => array(
 			"Warenkorb" => "?p=cart",
-			"Meine Bestellungen" => "#"
+			"Meine Bestellungen" => "?p=displayAllOrders"
 			),
 		"Profil" => array(
 			"Bearbeiten" => array(

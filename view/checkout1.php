@@ -25,5 +25,6 @@
 <script>
   $(function() {
     $( "#datepicker" ).datetimepicker();
+    document.getElementById('datepicker').value = dateFormat(new Date(), "mm/dd/yyyy HH:MM");
   });
 </script>

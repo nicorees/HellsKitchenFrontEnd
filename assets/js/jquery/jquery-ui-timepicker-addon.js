@@ -29,8 +29,8 @@
 	var Timepicker = function () {
 		this.regional = []; // Available regional settings, indexed by language code
 		this.regional[''] = { // Default regional settings
-			currentText: 'Now',
-			closeText: 'Done',
+			currentText: 'Jetzt',
+			closeText: 'Fertig',
 			amNames: ['AM', 'A'],
 			pmNames: ['PM', 'P'],
 			timeFormat: 'HH:mm',

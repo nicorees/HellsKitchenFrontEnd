@@ -91,6 +91,9 @@
 
 </script>
 
+<h3>Registrierung</h3>
+<br/>
+
 <form id="Formular" action="<?php URL_BASE . "?p=register" ?>" method="post">		
 
 			<label for="txt_vorname">Vorname: </label><br /> <input class="textfield" type="text"
@@ -117,7 +120,7 @@
 				value="" /> <br />
 				
 			<label for="txt_password">Passwort: </label> <br /> <input class="textfield" type="password" name="txt_password"
-				value="" /> <br />		
+				value="" /> <br /><br/>		
 
-			<input class="button" type="submit" name="btn_register" value="register" />		
+			<input class="button" type="submit" name="btn_register" value="Registrieren" />		
 </form>
