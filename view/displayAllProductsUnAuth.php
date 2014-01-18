@@ -56,6 +56,7 @@ $products = Product::getAllPublicAvailableProducts();
 							}
 						?>
 					</ul>
+					<pre class="tertiary-text-secondary" style="text-align: center;">(<?php echo round($p->getRating(), 2) . " aus " . $p->getNumberOfRatings() . " Bewertungen"; ?>)</pre>
 				</div>
 			</td>
 		</tr>

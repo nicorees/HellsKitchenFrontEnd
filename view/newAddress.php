@@ -40,8 +40,8 @@
 			<label for="txt_stadt">Stadt: </label>
 			<input class="textfield" type="text" name="txt_stadt" value="" /> <br /> <br />
 			
-			<input class="button" type="submit" name="btn_save" value="Adresse anlegen" />
-			<a href="javascript:history.back()" class="button">Zurück</a>
+			<input type="submit" name="btn_save" value="Adresse anlegen" />
+			<a class="button" href="javascript:history.go(-2)">Zurück</a>
 </form>
 
 <style type="text/css">

@@ -12,54 +12,64 @@ if(empty($products)){
 			eine zu kreieren!
 		</span>";
 }
-	else{
+	else {
 ?>
 
-	<h1>Deine Pizzen</h1>
-	<br/>
+			<h1>Deine Pizzen</h1>
+			<br/>
 
-	<table id="products" class="table striped">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Preis</th>
-				<th>Beschreibung</th>
-				<th>Zutaten</th>
-				<th>Veröffentlicht</th>			
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach ($products as $p){ ?>
-			<tr>
-				<td><?php echo $p->getName(); ?></td>
-				<td><?php echo $p->getPrice(); ?></td>
-				<td><?php echo $p->getDescription(); ?></td>
-				<td>
-					<?php 
-						foreach ($p->getIngredients() as $i) {
-							$ingredient = new Ingredient($i);
-							echo "" . $ingredient->getName() . " ";
-						}
-					?>
-				</td>
-				<td>
-					<?php 
-						if ($p->getPrivate())
-							echo "Nein <i class='icon-locked'></i>";
-						else
-							echo "Ja <i class='icon-unlocked'></i>";
-					?>
-					<br/>
-					<a href='<?php echo '?c=changeProductVisibility&pid=' . $p->getId() ; ?>' class='fg-crimson'>
-        				&aumlndern
-					</a>
-				</td>
-				
-			</tr>
-			<?php } ?>
-		</tbody>
-	</table>
-	
+			<form action="?c=cartAdd" method="post">
+				<table class="table striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Preis</th>
+							<th>Beschreibung</th>
+							<th>Zutaten</th>
+							<th>Veröffentlicht</th>
+							<th>Bestellen</th>		
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($products as $p){ ?>
+						<tr>
+							<td><?php echo $p->getName(); ?></td>
+							<td>€ <?php echo number_format($p->getPrice(),2,'.',''); ?></td>
+							<td><?php echo $p->getDescription(); ?></td>
+							<td>
+								<?php 
+									foreach ($p->getIngredients() as $i) {
+										$ingredient = new Ingredient($i);
+										echo "" . $ingredient->getName() . " ";
+									}
+								?>
+							</td>
+							<td>
+								<?php 
+									if ($p->getPrivate())
+										echo "Nein <i class='icon-locked'></i>";
+									else
+										echo "Ja <i class='icon-unlocked'></i>";
+								?>
+								<br/>
+								<a href='<?php echo '?c=changeProductVisibility&pid=' . $p->getId() ; ?>' class='fg-crimson'>
+				    				&aumlndern
+								</a>
+							</td>
+							<td class="short-column">
+								<div class="input-control checkbox" data-role="input-control">
+									<label>
+										<input type="checkbox" name="<?php echo $p->getID() ?>"/>
+										<span class="check"></span>
+									</label>
+								</div>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+				<input type="submit" id="submit" name="submit" value="Zum Warenkorb hinzufügen" />
+			</form>	
 <?php
 	}
 ?>

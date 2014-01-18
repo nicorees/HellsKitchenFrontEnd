@@ -57,6 +57,7 @@ class Order extends DB {
 		$this->setAddressID($addressID);
 
 		$totalPrice = 0;
+		$deliveryCosts = NULL;
 
 		foreach ($this->getOrderLines() as $j => $orderline) {
 			$totalPrice += ( $orderline->getPrice() * $orderline->getQuantity() ) ;
@@ -64,9 +65,12 @@ class Order extends DB {
 
 		$this->setTotalPrice($totalPrice);
 
-		$deliveryCosts = Address::calculateDeliveryCosts($addressID);
-
-		if (!$deliveryCosts) return FALSE;
+		if(!$pickup) {
+			$deliveryCosts = Address::calculateDeliveryCosts($addressID);
+			if (!$deliveryCosts) return FALSE;	
+		} else {
+			$deliveryCosts = 0;
+		}
 
 		$this->setDeliveryCosts($deliveryCosts);
 
@@ -130,6 +134,8 @@ class Order extends DB {
 		$db = new DB();
 
 		$result = $db->doQuery($sql);
+
+		return $db->insert_id();
 	}
 
 	public static function removeFromCart($customerID, $productID) {
@@ -164,6 +170,8 @@ class Order extends DB {
 
 	public static function addToCart($customerID, $products) {
 
+		$orderID = NULL;
+
 		$sql = sprintf("SELECT OrderID FROM `" . DB . "`.`" . TABLE_ORDERS . "` 
 			WHERE CustomerID = '%s'
 			AND StatusID = 1
@@ -173,10 +181,15 @@ class Order extends DB {
 		$db = new DB();
 
 		$result = $db->doQuery($sql);
-				
+
 		if ( ! $result ) return FALSE;
 
-		$orderID = $result->fetch_object()->OrderID;
+		$obj = $result->fetch_object();
+
+		if(is_null($obj))
+			$orderID = self::createCartForCustomer($customerID);
+		else
+			$orderID = $obj->OrderID;
 
 		$cart = self::getCart($customerID);
 

@@ -5,7 +5,10 @@
 		header("Location: .");
 	}
 
-	$_SESSION['orderTime'] = $_POST['ordertime'];
+	if(isset($_POST['ordertime']))
+		$_SESSION['orderTime'] = $_POST['ordertime'];
+	else
+		header("Location: ?p=checkout1");
 ?>
 
 <h1>Bestellung abschließen</h1>

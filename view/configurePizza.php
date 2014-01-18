@@ -16,11 +16,22 @@ $ingredients = Ingredient::getAllIngredients();
 			</tr>
 		</thead>
 		<tbody>
-		<p>Name der Pizza</p>
+		<p>Name deiner Pizza: (max. 45 Zeichen)</p>
 		<input class="textfield" type="text" name="txt_pizzaname" value="" style="width: 400px;	" />
+		<p>Beschreibe deine Pizza: (max. 45 Zeichen)</p>
+		<input class="textfield" type="text" name="txt_pizzadesc" value="" style="width: 400px;	" />
 			<?php foreach ($ingredients as $i): ?>
 			<tr>
-				<td><img width="70px" height="70px" src=<?php  echo "assets/img/ingredients/" . $i->getID() . ".jpg" ?> ></td>
+				<td>
+					<img width="70px" height="70px" src=
+						<?php
+							if (file_exists(DOC_ROOT . "assets/img/ingredients/" . $i->getID() . ".jpg"))
+								echo "assets/img/ingredients/" . $i->getID() . ".jpg";
+							else
+								echo "assets/img/ingredients/default.jpg";
+						?>
+					>
+				</td>
 				<td><?php echo $i->getName(); ?></td>
 				<td><?php echo sprintf("%.2f",$i->getPrice()) ."€" ;?> </td>
 				<td class="short-column">

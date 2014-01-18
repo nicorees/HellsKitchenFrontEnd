@@ -3,28 +3,40 @@
 		
 		// erzeuge neues Produkt
 		$product = new Product();
+		
 		// bekomme alle ausgewälten Zutaten als Arry
-		$id = $_POST['IngredientID'];
+		if(isset($_POST['IngredientID']))
+			$id = $_POST['IngredientID'];
+		else
+			$id = array();
+
 		// Setze den Namen aus der POST-Variable
 		$name = $_POST['txt_pizzaname'];
+		
 		// Grundpreis 3.00 €, welcher in TABLE_Product eingepflegt wird
 		$price = 3.00;
+		
 		// öffentlich oder nicht öffentlich?
-		$private = $_POST['private'];
+		if(isset($_POST['private']))
+			$private =  $_POST['private'];
+		else
+			$private = TRUE;
+		
 		// Besitzer / Ersteller
-		$customerID = $_SESSION['customerID'];		
+		$customerID = $_SESSION['customerID'];	
 
+		$product->setCustomerID($customerID);
 		$product->setName($name);
 		$product->setPrice($price);
 		$product->setIngredients($id);
 		$product->setPrivate($private);
-		$product->setCustomerID($customerID);
+		$product->setDescription($_POST['txt_pizzadesc']);
 		
 		if($product->saveProduct())
 			header("Location: " . URL_BASE . "?p=displayPrivateProducts");
 		else {
-		// SET ERROR MESSAGE
-		header("Location: " . URL_BASE);
+			// SET ERROR MESSAGE
+			header("Location: " . URL_BASE);
 		}
 	}
 ?>

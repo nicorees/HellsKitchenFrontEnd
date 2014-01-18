@@ -38,6 +38,30 @@ class Address extends DB{
 		$this->setCity($this->address->City);
 		$this->setDistance($this->address->Distance);
 	}
+
+	public function calculateCurrentDeliveryTime() {
+
+		//setze addresse als ganzen string zusammen 
+		$address_combined = sprintf("%s %s, %s",
+			$this->getZip(),
+			$this->getCity(),
+			$this->getStreet());
+
+		//bereite url für googlemaps api call vor
+		$googlemaps_url = sprintf(GOOGLEMAPS_API_URL,
+			$address_combined,
+			MAIN_ADDRESS);
+
+		//führe googlemaps api call durch
+		if($xml=simplexml_load_file($googlemaps_url)){
+			if( $xml->row->element->status == 'OK' ) {
+				$time = preg_replace('/\skm/', '', $xml->row->element->duration->text);
+				$time = preg_replace('/,/', '.', $time);
+				return $time;
+			} else
+				return FALSE;
+		}
+	}
 	
 	public static function calculateDeliveryCosts($id) {
 

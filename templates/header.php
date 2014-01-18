@@ -32,6 +32,7 @@
 	</head>
 
 	<body class="metro">
+
 		<header class="bg-dark">
 			<nav class="navigation-bar fixed-top dark">
 				<div class="navigation-bar-content container">
@@ -47,4 +48,7 @@
 		<div class="wrapper">
 			<div class="grid">
 				<div class="row">
+					<div class="banner">
+						<img width="560" height="100" src="assets/img/banner.png"/>
+					</div>
 					<div class="span12">

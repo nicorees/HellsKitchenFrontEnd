@@ -12,6 +12,7 @@ class Product extends DB {
 	private $customerID = NULL;
 	private $private = NULL;
 	private $rating = 0;
+	private $numberOfRatings = 0;
 
 	private $ingredients = array();
 	
@@ -91,6 +92,7 @@ class Product extends DB {
 		$this->description = $this->product->Description;
 		$this->private = $this->product->Private;
 		$this->rating = @($this->product->SumOfRating / $this->product->NumOfRater);
+		$this->numberOfRatings = $this->product->NumOfRater;
 
 		$this->setAvailable( (boolean)$this->product->Available );
 		
@@ -175,7 +177,7 @@ class Product extends DB {
 				mysql_real_escape_string($this->getName()),
 				mysql_real_escape_string($this->getPrice()),
 				mysql_real_escape_string($this->getPrivate()),
-				mysql_real_escape_string('Erstellt von '.  $customer->getFirstname() .' '. $customer->getLastname() ),
+				mysql_real_escape_string($this->getDescription()),
 				mysql_real_escape_string(1),
 				mysql_real_escape_string($this->getCustomerID()));
 
@@ -251,7 +253,12 @@ class Product extends DB {
 	}
 
 	public function setName($name) {
-		$this->name = $name;
+		if(empty($name)) {
+			$customer = new Customer($this->getCustomerID());
+			$name = $customer->getFirstname() . "'s Custom Pizza";
+		}
+
+		$this->name = substr($name,0,45);
 	}
 
 	public function getPrice() {
@@ -270,6 +277,15 @@ class Product extends DB {
 	
 	public function getDescription() {
 		return $this->description;
+	}
+
+	public function setDescription($description) {
+		if(empty($description)) {
+			$customer = new Customer($this->getCustomerID());
+			$description = "Erstellt von " .  $customer->getFirstname() . " " . $customer->getLastname();
+		}
+
+		$this->description = substr($description,0,45);
 	}
 
 	public function getIngredients() {
@@ -314,6 +330,14 @@ class Product extends DB {
 
 	public function setRating($rating) {
 		$this->rating = $rating;
+	}
+
+	public function getNumberOfRatings() {
+		return $this->numberOfRatings;
+	}
+
+	public function setNumberOfRatings($numberOfRatings) {
+		$this->numberOfRatings = $numberOfRatings;
 	}
 }
 

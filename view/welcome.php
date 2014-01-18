@@ -1,20 +1,3 @@
-<?php
-
-$customerID = $_SESSION['customerID'];
-
-$db = new DB();
-
-$sql = "SELECT firstname, lastname from customer where customerid='$customerID'";
-
-$user = $db->doQuery($sql)->fetch_object();
-
-$first = $user->firstname;
-$last = $user->lastname;
-
-echo "<h2>Hallo $first! Was möchtest du tun?</h2>";
-echo "<br/>";
-
-?>
 <div class="span8">
 	<a href='?p=configurePizza'>
 		<div class="tile double bg-crimson">

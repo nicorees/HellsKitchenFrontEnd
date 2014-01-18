@@ -43,8 +43,8 @@
 	echo '<h3>Hier hast du die Möglichkeit, deine allgemeinen Daten zu bearbeiten:</h3>';
 	echo '<br/>';
 	echo '<p>';
-		echo '<a href="?p=editEMail" style="margin-right: 10px;">Email Adresse ändern</a>';
-		echo '<a href="?p=editPassword">Passwort ändern</a>';
+		echo '<a class="button" href="?p=editEMail" style="margin-right: 10px;">Email Adresse ändern</a>';
+		echo '<a class="button" href="?p=editPassword">Passwort ändern</a>';
 	echo '</p>';
 	echo '<br/>';
 

@@ -40,6 +40,11 @@ class Menubuilder {
 	 */
 	public static function buildAuthMenu() {
 
+		$first = $_SESSION['customerFirst'];
+
+		self::$menulinks[$first . "'s Profil"] = self::$menulinks["Profil"];
+		unset(self::$menulinks["Profil"]);
+
 		foreach (self::$menulinks as $level1 => $level2) {
 			
 			print("<div class='element'>");

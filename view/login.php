@@ -7,15 +7,41 @@
 
 		$customerid = Customer::authenticate($email,$password);
 
-		if($customerid === FALSE) {
-			header("Location: .");
+		if($customerid == FALSE) {
+		?>
+			<script type="text/javascript">
+			    $.Dialog({
+			    	flat: true,
+			    	draggable: true,
+			        shadow: true,
+			        overlay: true,
+			        icon: '<span class="icon-blocked fg-crimson"></span>',
+			        title: '<span class="fg-crimson">Login fehlgeschlagen</span>',
+			        padding: 10,
+			        width: 500,
+			        content: '<span class="readable-text">Ihr Versuch sich einzuloggen schlug fehl, <br/>bitte überprüfen Sie Ihre Anmeldedaten.</span><br/><br/>' +
+			        	'<span class="readable-text">Falls Sie noch kein Benutzerkonto haben, <br/>können Sie sich jederzeit <a href=".?p=register">registrieren</a>.</span>'
+			    });
+			</script>
+		<?php
 		} else {
 			$_SESSION['customerID'] = $customerid;
 
+			$db = new DB();
+
+			$sql = "SELECT firstname from customer where customerid='$customerid'";
+
+			$user = $db->doQuery($sql)->fetch_object();
+
+			$first = $user->firstname;
+
+			$_SESSION['customerFirst'] = $first;
+
 			header("Location: " . URL_BASE . "?p=welcome");
 		}
-	}	
+	}
 ?>
+
 <h3>Login:</h3>
 <form action="" method="post">
 	<p>

@@ -3,7 +3,7 @@
 	$cart->setStatusID(2);
 
 	if(!empty($cart->getOrderLines()) && $cart->save())
-		header("Location: .");
+		header("Location: ?p=displayAllOrders");
 	else {
 		//SET ERROR MSG
 		header("Location: .");

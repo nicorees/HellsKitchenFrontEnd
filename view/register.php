@@ -19,10 +19,11 @@
 		//prüfe ob registration erfolgreich, wenn ja leite auf welcome weiter, wenn nicht auf login
 		if(is_numeric($customerid)) {
 			$_SESSION['customerID'] = $customerid;
+			$_SESSION['customerFirst'] = $customer->getFirstname();
 			header("Location: " . URL_BASE . "?p=welcome");
 		}
 		else
-			header("Location: " . URL_BASE);
+			header("Location: .?e=regfailed");
 	}
 ?>
 

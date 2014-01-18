@@ -18,6 +18,10 @@ table .short-column {
 	margin-right: 10px;
 }
 
+.banner {
+	margin-bottom: 20px;
+}
+
 .ui-timepicker-div .ui-widget-header { 
 	margin-bottom: 8px; 
 }

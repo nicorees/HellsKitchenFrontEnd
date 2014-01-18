@@ -33,9 +33,9 @@
 					}
 				?>
 			</td>
-			<td>€ <?php echo $o->getTotalPrice(); ?></td>
-			<td>€ <?php echo $o->getDeliveryCosts(); ?></td>
-			<td>€ <?php echo ($o->getTotalPrice() + $o->getDeliveryCosts()); ?></td>
+			<td>€ <?php echo number_format($o->getTotalPrice(),2,'.',''); ?></td>
+			<td>€ <?php echo number_format($o->getDeliveryCosts(),2,'.',''); ?></td>
+			<td>€ <?php echo number_format(($o->getTotalPrice() + $o->getDeliveryCosts()),2,'.',''); ?></td>
 			<td><?php echo $o->getStatusText(); ?></td>
 		</tr>
 		<?php endforeach; ?>
