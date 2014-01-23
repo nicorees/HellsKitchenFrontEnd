@@ -26,6 +26,7 @@
 				
 					if($customer->save($_SESSION['addressID'])) {
 						echo 'Deine Daten wurden wie gewünscht aktualisiert.<br/><br/>';
+						$_SESSION['customerFirst'] = $customer->getFirstname();
 					} else {
 						echo 'Es trat ein Fehler auf, bitte versuche es erneut.<br/><br/>';
 					}

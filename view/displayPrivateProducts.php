@@ -34,7 +34,7 @@ if(empty($products)){
 						<?php foreach ($products as $p){ ?>
 						<tr>
 							<td><?php echo $p->getName(); ?></td>
-							<td>€ <?php echo number_format($p->getPrice(),2,'.',''); ?></td>
+							<td class="nowrap">€ <?php echo number_format($p->getPrice(),2,'.',''); ?></td>
 							<td><?php echo $p->getDescription(); ?></td>
 							<td>
 								<?php 

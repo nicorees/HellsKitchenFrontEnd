@@ -60,7 +60,7 @@
 						<pre class="tertiary-text-secondary" style="text-align: center;">(<?php echo round($p->getRating(), 2) . " aus " . $p->getNumberOfRatings() . " Bewertungen"; ?>)</pre>
 					</div>
 				</td>
-				<td>€ <?php echo number_format($p->getPrice(), 2, '.', ''); ?></td>
+				<td class="nowrap">€ <?php echo number_format($p->getPrice(), 2, '.', ''); ?></td>
 				<td class="short-column">
 					<div class="input-control checkbox" data-role="input-control">
 						<label>
