@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Dieser Klasse dien der Erstellung und "Zerstörung" von Sessions
+ * @author Andreas Nenning, Nicholas Rees
+ */
+
 class Session {
 	
 	public function __construct() {

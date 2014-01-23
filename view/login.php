@@ -1,4 +1,9 @@
 <?php
+	
+	/**
+	 * Diese View erlaubt es einem User sich einzuloggen
+	 * @author Andreas Nenning
+	 */
 
 	if(isset($_POST['btn_login'])) {
 

@@ -1,4 +1,11 @@
 <?php
+
+	/**
+	 * Diese View repräsentiert den ersten Schritt des Abschlusses
+	 * einer Bestellung
+	 * @author Nicholas Rees
+	 */
+
 	$cart = Order::getCart($_SESSION['customerID']);
 	
 	if(empty($cart->getOrderLines())) {

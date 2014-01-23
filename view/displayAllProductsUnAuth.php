@@ -1,5 +1,12 @@
 <?php
-$products = Product::getAllPublicAvailableProducts();
+
+	/**
+	 * Diese View zeigt auch nicht eingeloggten Usern
+	 * alle öffentlich Sichtbaren Produkte an
+	 * @author Andreas Nenning, Nicholas Rees
+	 */
+
+	$products = Product::getAllPublicAvailableProducts();
 ?>
 
 <h1>Alle Pizzen im Angebot</h1>

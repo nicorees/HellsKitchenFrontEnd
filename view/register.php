@@ -1,4 +1,10 @@
-<?php	
+<?php
+
+	/**
+	 * Diese View erlaubt es dem User sich zu registrieren
+	 * @author Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk
+	 */	
+
 	if(isset($_POST['btn_register'])){
 		
 		//lege neuen Customer an

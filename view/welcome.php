@@ -1,3 +1,6 @@
+<!--TEMPLATE FÜR DIE WELCOME / LANDING PAGE -->
+<!--@AUTHOR Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk -->
+
 <div class="span8">
 	<a href='?p=configurePizza'>
 		<div class="tile double bg-crimson">

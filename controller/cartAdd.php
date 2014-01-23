@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Dieser Controller fügt dem Warenkorb ein Produkt hinzu
+	 * @author Nicholas Rees
+	 */
+
 	$customerID = $_SESSION['customerID'];
 	$products = array();
 

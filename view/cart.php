@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Diese View lädt und zeigt den Warenkorb des Kunden an
+	 * @author Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk
+	 */
+
 	$cart = Order::getCart($_SESSION['customerID']);
 	
 	if(empty($cart->getOrderLines())) {

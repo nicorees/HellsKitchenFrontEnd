@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Diese View zeigt dem User alle öffentlich Sichtbaren Produkte an
+	 * @author Andreas Nenning, Nicholas Rees
+	 */
+
 	$products = Product::getAllPublicAvailableProducts();
 ?>
 

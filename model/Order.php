@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Klasse repräsentiert eine Bestellung eines Kunden
+ * @author Nicholas Rees, Steffen Schenk
+ */
+
 class Order extends DB {
 
 	private $order = NULL;

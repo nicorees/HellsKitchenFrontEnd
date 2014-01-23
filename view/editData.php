@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Diese View erlaubt es dem Kunden seine Daten zu bearbeiten
+	 * @author Christian Vogg, Steffen Schenk
+	 */
+
 	$customer = new Customer($_SESSION["customerID"]);
 
 	if(isset($_POST['txt_vorname'])) {

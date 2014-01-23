@@ -1,8 +1,9 @@
 <?php
 
-/*
- * Helperklasse fürs Bauen des Navigationmenüs 
-*/
+/**
+ * Helperklasse für das Bauen des Navigationmenüs 
+ * @author Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk
+ */
 
 class Menubuilder {
 	

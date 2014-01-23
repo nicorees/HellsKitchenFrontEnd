@@ -1,4 +1,11 @@
 <?php
+
+	/**
+	 * Diese View repräsentiert den dritten und letzten Schritt des Abschlusses
+	 * einer Bestellung
+	 * @author Nicholas Rees, Steffen Schenk
+	 */
+
 	$cart = Order::getCart($_SESSION['customerID']);
 	
 	if(empty($cart->getOrderLines())) {

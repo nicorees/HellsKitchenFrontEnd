@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Diese View zeigt dem User alle seine Bestellungen an
+	 * @author Nicholas Rees
+	 */
+
 	$orders = Order::getAllOrders($_SESSION['customerID']);
 ?>
 

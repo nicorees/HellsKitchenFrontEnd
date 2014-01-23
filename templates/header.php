@@ -1,3 +1,6 @@
+<!--TEMPLATE FÜR DEN HEADER JEDER SEITE -->
+<!--@AUTHOR Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk -->
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Alle Models erben von dieser Klasse, sie ermöglicht
+ * Datenbank Operationen
+ * @author Nicholas Rees
+ */
+
 class DB {
 	
 	private $con;

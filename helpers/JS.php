@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Dieser Helper lädt die JavaScript Dateien
+ * @author Nicholas Rees
+ */
+
 class JS {
 	
 	public static function get($js) {

@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Diese View erlaubt es dem User sein Passwort zu ändern
+	 * @author Andreas Nenning, Christian Vogg
+	 */
+
 	$customer = new Customer($_SESSION["customerID"]);
 
 	if(isset($_POST['btn_edit']) && !empty($_POST['btn_edit'])) {

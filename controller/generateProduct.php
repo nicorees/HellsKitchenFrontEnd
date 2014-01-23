@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Dieser Controller legt ein neues vom Kunden erstelltes Produkt an
+	 * @author Andreas Nenning, Steffen Schenk
+	 */
+
 	if(isset($_POST['bnt_bestellen'])) {
 		
 		// erzeuge neues Produkt

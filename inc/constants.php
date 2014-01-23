@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Datei enthält alle Globalen Konstanten welche für
+ * die Konfiguration von nöten sind.
+ */
+
 // database connection settings
 define("DB_HOST", "localhost:3306");
 define("DB_USER", "root");

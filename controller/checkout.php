@@ -1,4 +1,10 @@
 <?php
+
+	/**
+	 * Dieser Controller wandelt den Warenkorb in eine Bestellung um
+	 * @author Nicholas Rees
+	 */
+
 	$cart = Order::getCart($_SESSION['customerID']);
 	$cart->setStatusID(2);
 

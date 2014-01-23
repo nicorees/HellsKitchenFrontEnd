@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Dieser Helper lädt die CSS Dateien
+ * @author Nicholas Rees
+ */
+
 class CSS {
 	
 	public static function get($css) {

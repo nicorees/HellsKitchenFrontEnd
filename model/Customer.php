@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Klasse repräsentiert einen Kunden
+ * @author Andreas Nenning, Christian Vogg, Nicholas Rees, Steffen Schenk
+ */
+
 class Customer extends DB {
 
 	private $customer = NULL;

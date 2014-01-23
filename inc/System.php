@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Dieser Klasse dient als Einstiegspunkt der Webanwendung.
+ * Sie steuert die Navigation des Users über "Routes", legt
+ * eine Session an und lädt automatisch angefordertwe Klassen nach.
+ * @author Nicholas Rees
+ */
+
 //require system constants
 require_once("inc/constants.php");
 

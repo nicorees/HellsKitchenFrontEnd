@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Dieser Controller entfernt ein Produkt aus dem Warenkorb.
+ * @author Nicholas Rees
+ */
+
 $productID = $_GET['pid'];
 $customerID = $_SESSION['customerID'];
 

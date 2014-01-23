@@ -1,7 +1,13 @@
 <?php
-$customer = new Customer($_SESSION["customerID"]);
-// fehlt noch: letztes bestelldatum der privaten pizza anzeigen --> evtl model ORDER einfügen?
-$products = Product::getCustomerProducts($customer->getCustomerID());
+
+	/**
+	 * Diese View zeigt dem User all seine erstellten Produkte an
+	 * @author Andreas Nenning, Nicholas Rees
+	 */
+
+	$customer = new Customer($_SESSION["customerID"]);
+	
+	$products = Product::getCustomerProducts($customer->getCustomerID());
 
 if(empty($products)){
 

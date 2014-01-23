@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Klasse repräsentiert ein Produkt
+ * @author Andreas Nenning, Nicholas Rees, Steffen Schenk
+ */
+
 class Product extends DB {
 
 	private $product = NULL;

@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * Diese View gibt dem User die Möglichkeit eine Pizza zu erstellen
+ * einer Bestellung
+ * @author Andreas Nenning, Steffen Schenk
+ */	
+
 $ingredients = Ingredient::getAllIngredients();
 
 ?>
+
 <h1>Erstelle deine eigene Pizza!</h1>
 <br/>
 <form action="?c=generateProduct" method="post">

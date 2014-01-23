@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Klasse repräsentiert eine Adresse eines Kunden
+ * @author Nicholas Rees, Steffen Schenk
+ */
+
 class Address extends DB{
 
 	private $address = NULL;

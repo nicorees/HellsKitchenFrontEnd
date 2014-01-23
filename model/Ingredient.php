@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Diese Klasse repräsentiert eine Zutat eines Produkts
+ * @author Andreas Nenning, Steffen Schenk
+ */
+
 class Ingredient extends DB {
 
 	private $ingredient = NULL;
@@ -64,11 +69,11 @@ class Ingredient extends DB {
 	*/
 	public function deleteIngredient($ingredient_id){
 	
-	$db = new parent;
-	
-	$sql = "DELETE * FROM `" . DB . "`.`" . TABLE_INGREDIENT . "` WHERE IngredientID = '$ingredient_id';";
-	
-	$result = $this->doQuery($sql);
+		$db = new parent;
+		
+		$sql = "DELETE * FROM `" . DB . "`.`" . TABLE_INGREDIENT . "` WHERE IngredientID = '$ingredient_id';";
+		
+		$result = $this->doQuery($sql);
 	 	
 	}
 	

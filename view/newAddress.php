@@ -1,4 +1,9 @@
-<?php	
+<?php
+
+	/**
+	 * Diese View erlaubt es dem User eine neue Adresse anzulegen
+	 * @author Andreas Nenning, Christian Vogg, Steffen Schenk
+	 */	
 
 	if(isset($_POST['txt_strasse'])) {
 
