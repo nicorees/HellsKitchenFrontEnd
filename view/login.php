@@ -25,7 +25,7 @@
 			        padding: 10,
 			        width: 500,
 			        content: '<span class="readable-text">Ihr Versuch sich einzuloggen schlug fehl, <br/>bitte überprüfen Sie Ihre Anmeldedaten.</span><br/><br/>' +
-			        	'<span class="readable-text">Falls Sie noch kein Benutzerkonto haben, <br/>können Sie sich jederzeit registrieren</span>'
+			        	'<span class="readable-text">Falls Sie noch kein Benutzerkonto haben, <br/>können Sie sich jederzeit <a href=\'#\' onClick="self.location=\'.?p=register\'">registrieren</a></span>'
 			    });
 			</script>
 		<?php

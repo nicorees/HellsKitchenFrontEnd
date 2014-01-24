@@ -6,7 +6,7 @@
  * @author Andreas Nenning, Steffen Schenk
  */	
 
-$ingredients = Ingredient::getAllIngredients();
+$ingredients = Ingredient::getAllAvailableIngredients();
 
 ?>
 
@@ -16,7 +16,7 @@ $ingredients = Ingredient::getAllIngredients();
 	<table id="Ingredients" class="table striped slim">
 		<thead>
 			<tr>
-				<th class="text-left"></th>
+				<th class="text-left">W&aumlhle deine Zutaten:</th>
 				<th class="text-left">Zutat</th>
 				<th class="text-left">Preis</th>
 				<th class="text-left">Ausw&aumlhlen</th>
@@ -27,6 +27,7 @@ $ingredients = Ingredient::getAllIngredients();
 		<input class="textfield" type="text" name="txt_pizzaname" value="" style="width: 400px;	" />
 		<p>Beschreibe deine Pizza: (max. 45 Zeichen)</p>
 		<input class="textfield" type="text" name="txt_pizzadesc" value="" style="width: 400px;	" />
+		<br/><br/>
 			<?php foreach ($ingredients as $i): ?>
 			<tr>
 				<td>

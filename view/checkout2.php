@@ -49,11 +49,10 @@
 
 	echo '</select> <br/><br/>';
 
-	echo '<a href=".?p=newAddress">neue Adresse anlegen?</a><br/><br/>';
-
 	echo '</div> <br/>';
 
-	echo '<input type="submit" id="submit" name="submit" value="Weiter" />';
+	echo '<input type="submit" id="submit" name="submit" value="Weiter" /> ';
+	echo '<a class="button" href="?p=checkout1">Zurück</a>';
 	echo '</form><br/>';
 
 ?>

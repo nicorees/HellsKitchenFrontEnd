@@ -21,7 +21,8 @@ class System {
 	private $pages_unauth = array(
 			"register",
 			"login",
-			"displayAllProductsUnAuth"
+			"displayAllProductsUnAuth",
+			"addressOutOfRange"
 	);
 
 	private $pages_auth = array(
@@ -50,6 +51,11 @@ class System {
 			"changeProductVisibility",
 			"rateProduct",
 			"checkout"
+	);
+
+	private $errorpages = array(
+			"addressOutOfRange",
+			"registrationFailed"
 	);
 
 	public function __construct() {
@@ -133,6 +139,12 @@ class System {
 		require_once( DOC_ROOT . "templates/header.php" );
 		require_once( DOC_ROOT . "view/$content.php" );
 		require_once( DOC_ROOT . "templates/footer.php" );
+		
+		//load errorpage, if specified and existing
+		if(isset($_GET['e']) && in_array($_GET['e'], $this->errorpages)) {
+			$errorpage = $_GET['e'];
+			require_once( DOC_ROOT . "view/error/$errorpage.php" );
+		}
 	}
 }
 

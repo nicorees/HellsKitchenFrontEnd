@@ -92,7 +92,7 @@
 
 ?>
 		
-<form id="Formular" action="#" method="post">	
+<form id="Formular" action="?p=editData" method="post">	
 	<label for="txt_vorname">Vorname: </label> 
 	<input class="textfield" type="text" name="txt_vorname" value="<?php echo $customer->getFirstname(); ?>" /> <br/>
 	

@@ -101,9 +101,44 @@ class Address extends DB{
 		elseif ($distance > $distClass2->Maximum && $distance <= $distClass3->Maximum)
 			$deliveryCosts = $distClass3->Price;
 		else
-			return FALSE;
+			return header("Location: .?p=cart&e=addressOutOfRange");
 
 		return $deliveryCosts;
+	}
+
+	public static function AddressInRange($distance) {
+		
+		$db = new DB();
+
+		$sql = sprintf("SELECT * FROM `" . DB . "`.`" . TABLE_DIST_CLASS . "`");
+		
+		$result = $db->doQuery($sql);
+				
+		if ( ! $result ) return FALSE;
+		
+		$distClass1 = $result->fetch_object();
+		$distClass2 = $result->fetch_object();
+		$distClass3 = $result->fetch_object();
+
+		return ($distance <= $distClass3->Maximum);
+
+	}
+
+	public static function maxDistance() {
+		
+		$db = new DB();
+
+		$sql = sprintf("SELECT * FROM `" . DB . "`.`" . TABLE_DIST_CLASS . "`");
+		
+		$result = $db->doQuery($sql);
+				
+		if ( ! $result ) return FALSE;
+		
+		$distClass1 = $result->fetch_object();
+		$distClass2 = $result->fetch_object();
+		$distClass3 = $result->fetch_object();
+
+		return $distClass3->Maximum;
 	}
 
 	public function getAddressID() {

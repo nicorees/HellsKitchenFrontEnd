@@ -63,6 +63,11 @@ class Customer extends DB {
 		if ( !$this->calculateDistance() )
 			return FALSE;
 
+		if( !Address::AddressInRange($this->getDistance()) ) {
+			header("Location: .?p=register&e=addressOutOfRange");
+			die;
+		}
+
 		//bereite statement für einfügen in tabelle Address vor
 		$sql_insert_address = sprintf("INSERT INTO `" . DB . "`.`" . TABLE_ADDRESS . "`
 				(`CustomerID`, `Street`, `ZIP`, `City`, `Distance`)
@@ -164,6 +169,11 @@ class Customer extends DB {
 		if( !$this->calculateDistance() )
 			return FALSE;
 
+		if( !Address::AddressInRange($this->getDistance()) ) {
+			header("Location: .?p=editData&e=addressOutOfRange");
+			die;
+		}
+
 		//query for updating the customer's street, city, zip
 		$sql_update_address = sprintf("UPDATE `" . DB . "`.`" . TABLE_ADDRESS . "` 
 			SET street = '%s',
@@ -257,6 +267,13 @@ class Customer extends DB {
 			false, wenn die Addresse nicht erfolgreich gespeichert werden konnte
 	*/
 	public function insertNewAddress() {
+
+		$this->calculateDistance();
+
+		if( !Address::AddressInRange($this->getDistance()) ) {
+			header("Location: .?p=newAddress&e=addressOutOfRange");
+			die;
+		}
 
 		//starte transaktion um rollback durchführen zu können, falls was schief geht
 		$this->doQuery("START TRANSACTION");

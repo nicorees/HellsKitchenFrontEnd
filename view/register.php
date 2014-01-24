@@ -10,6 +10,12 @@
 		//lege neuen Customer an
 		$customer = new Customer();
 
+		//wenn Passwörter unterschiedlich => Fehlermeldung
+		if($_POST['txt_password'] !== $_POST['txt_passwordconf']) {
+			header("Location: .?p=register&e=registrationFailed");
+			die;
+		}
+
 		//setze alle Instanzvariablen
 		$customer->setFirstname($_POST['txt_vorname']);
 		$customer->setLastname($_POST['txt_nachname']);
@@ -28,8 +34,10 @@
 			$_SESSION['customerFirst'] = $customer->getFirstname();
 			header("Location: " . URL_BASE . "?p=welcome");
 		}
-		else
-			header("Location: .?e=regfailed");
+		else {
+			header("Location: .?p=register&e=registrationFailed");
+			die;
+		}
 	}
 ?>
 
@@ -50,6 +58,12 @@
 					required: true,
 					minlength: 5,
 					maxlength: 10			
+				},
+				// Passwort bestätigung: Pflichtfeld, min. 5, max 10 Zeichen
+				txt_passwordconf: {
+					minlength: 5,
+					maxlength: 10,
+					equalTo : "#txt_password"
 				},
 				// Email: Pflichtfeld, adäquates Emailformat
 				txt_email: {
@@ -76,6 +90,11 @@
 					required: "Bitte Passwort angeben!",
 					minlength: jQuery.format("mindestens {0} Zeichen eingeben!"),
 					maxlength: jQuery.format("maximal {0} Zeichen eingeben!")
+				},
+				txt_passwordconf: {
+					minlength: jQuery.format("mindestens {0} Zeichen eingeben!"),
+					maxlength: jQuery.format("maximal {0} Zeichen eingeben!"),
+					equalTo: "Muss gleich wie Passwort sein!"
 				},
 				txt_plz: {
 					digits: "Bitte nur numerische Werte eingeben",
@@ -126,7 +145,10 @@
 			<label for="txt_stadt">Stadt: </label> <br /> <input class="textfield" type="text" name="txt_stadt"
 				value="" /> <br />
 				
-			<label for="txt_password">Passwort: </label> <br /> <input class="textfield" type="password" name="txt_password"
+			<label for="txt_password">Passwort: </label> <br /> <input class="textfield" id="txt_password" type="password" name="txt_password"
+				value="" /> <br /><br/>
+
+			<label for="txt_passwordconf">Passwort best&aumltigen: </label> <br /> <input class="textfield"  id="txt_passwordconf" type="password" name="txt_passwordconf"
 				value="" /> <br /><br/>		
 
 			<input class="button" type="submit" name="btn_register" value="Registrieren" />		

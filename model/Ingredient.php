@@ -129,11 +129,12 @@ class Ingredient extends DB {
 	@return Array mit  Zutatan 
 			false, wenn keine Zutat geladen werden konnte
 	*/
-	public static function getAllIngredients() {
+	public static function getAllAvailableIngredients() {
 		// DB Referenz erstellen
 		$db = new parent;
 		
-		$sql = "SELECT * FROM `" . DB . "`.`" . TABLE_INGREDIENT . "`;";
+		$sql = "SELECT * FROM `" . DB . "`.`" . TABLE_INGREDIENT . "`
+			WHERE `AVAILABLE`='1';";
 		
 		$result = $db->doQuery($sql);
 		

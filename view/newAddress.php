@@ -21,6 +21,7 @@
 				echo '
 					<script>
 						alert("Die neue Adresse wurde hinzugefügt!");
+						document.location = ".?p=editData"
 					</script>
 					';
 			} else {
@@ -46,7 +47,7 @@
 			<input class="textfield" type="text" name="txt_stadt" value="" /> <br /> <br />
 			
 			<input type="submit" name="btn_save" value="Adresse anlegen" />
-			<a class="button" href="javascript:history.go(-2)">Zurück</a>
+			<a class="button" href="?p=editData">Zurück</a>
 </form>
 
 <style type="text/css">
