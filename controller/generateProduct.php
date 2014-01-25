@@ -5,7 +5,7 @@
 	 * @author Andreas Nenning, Steffen Schenk
 	 */
 
-	if(isset($_POST['bnt_bestellen'])) {
+	if(isset($_POST['btn_erstellen'])) {
 		
 		// erzeuge neues Produkt
 		$product = new Product();
@@ -18,8 +18,11 @@
 
 		// Setze den Namen aus der POST-Variable
 		$name = $_POST['txt_pizzaname'];
+
+		// Setze die Beschreiben aus der POST-Variable
+		$description = $_POST['txt_pizzadesc'];
 		
-		// Grundpreis 3.00 €, welcher in TABLE_Product eingepflegt wird
+		// Grundpreis € 3.00, welcher in TABLE_Product eingepflegt wird
 		$price = 3.00;
 		
 		// öffentlich oder nicht öffentlich?
@@ -27,22 +30,27 @@
 			$private =  $_POST['private'];
 		else
 			$private = TRUE;
+
+		if(empty($name) || empty($description) || empty($id))
+			header("Location: " . URL_BASE . "?p=configurePizza&e=productCreationFailed");
 		
 		// Besitzer / Ersteller
-		$customerID = $_SESSION['customerID'];	
+		$customerID = $_SESSION['customerID'];
 
 		$product->setCustomerID($customerID);
 		$product->setName($name);
 		$product->setPrice($price);
 		$product->setIngredients($id);
 		$product->setPrivate($private);
-		$product->setDescription($_POST['txt_pizzadesc']);
+		$product->setDescription($description);
+
+		var_dump($product);
+		die;
 		
 		if($product->saveProduct())
-			header("Location: " . URL_BASE . "?p=displayPrivateProducts");
+			header("Location: " . URL_BASE . "?p=displayPrivateProducts&e=productCreated");
 		else {
-			// SET ERROR MESSAGE
-			header("Location: " . URL_BASE);
+			header("Location: " . URL_BASE . "?p=configurePizza&e=productCreationFailed");
 		}
 	}
 ?>

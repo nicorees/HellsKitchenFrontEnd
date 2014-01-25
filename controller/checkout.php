@@ -9,7 +9,7 @@
 	$cart->setStatusID(2);
 
 	if(!empty($cart->getOrderLines()) && $cart->save())
-		header("Location: ?p=displayAllOrders");
+		header("Location: ?p=displayAllOrders&e=orderAdded");
 	else {
 		//SET ERROR MSG
 		header("Location: .");

@@ -56,7 +56,10 @@ class System {
 
 	private $errorpages = array(
 			"addressOutOfRange",
-			"registrationFailed"
+			"registrationFailed",
+			"orderAdded",
+			"productCreated",
+			"productCreationFailed"
 	);
 
 	public function __construct() {

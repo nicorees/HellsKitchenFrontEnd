@@ -72,5 +72,5 @@ $ingredients = Ingredient::getAllAvailableIngredients();
 		</div>
 	</p>
 
-	<input type="submit" id="submit" name="bnt_bestellen" value="Pizza Erstellen" />
+	<input type="submit" id="submit" name="btn_erstellen" value="Pizza Erstellen" />
 </form>
