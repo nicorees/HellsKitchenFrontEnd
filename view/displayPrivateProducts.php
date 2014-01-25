@@ -59,7 +59,7 @@ if(empty($products)){
 								?>
 								<br/>
 								<a href='<?php echo '?c=changeProductVisibility&pid=' . $p->getId() ; ?>' class='fg-crimson'>
-				    				&aumlndern
+				    				&auml;ndern
 								</a>
 							</td>
 							<td class="short-column">

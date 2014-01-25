@@ -148,7 +148,7 @@
 			<label for="txt_password">Passwort: </label> <br /> <input class="textfield" id="txt_password" type="password" name="txt_password"
 				value="" /> <br /><br/>
 
-			<label for="txt_passwordconf">Passwort best&aumltigen: </label> <br /> <input class="textfield"  id="txt_passwordconf" type="password" name="txt_passwordconf"
+			<label for="txt_passwordconf">Passwort best&auml;tigen: </label> <br /> <input class="textfield"  id="txt_passwordconf" type="password" name="txt_passwordconf"
 				value="" /> <br /><br/>		
 
 			<input class="button" type="submit" name="btn_register" value="Registrieren" />		

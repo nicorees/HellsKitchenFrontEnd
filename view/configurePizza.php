@@ -16,10 +16,10 @@ $ingredients = Ingredient::getAllAvailableIngredients();
 	<table id="Ingredients" class="table striped slim">
 		<thead>
 			<tr>
-				<th class="text-left">W&aumlhle deine Zutaten:</th>
+				<th class="text-left">W&auml;hle deine Zutaten:</th>
 				<th class="text-left">Zutat</th>
 				<th class="text-left">Preis</th>
-				<th class="text-left">Ausw&aumlhlen</th>
+				<th class="text-left">Ausw&auml;hlen</th>
 			</tr>
 		</thead>
 		<tbody>
