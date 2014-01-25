@@ -81,6 +81,7 @@ class Order extends DB {
 
 		return $this->save();
 	}
+	
 	// Liefert den Einkaufswagen eines bestimmen Benutzers
 	public static function getCart($customerID) {
 
@@ -105,6 +106,7 @@ class Order extends DB {
 
 		return new Order($obj->OrderID);
 	}
+	
 	// Speichert die Bestellung
 	public function save() {
 
@@ -126,7 +128,8 @@ class Order extends DB {
 
 		return $this->doQuery($sql);
 	}
-	// Erstelle einen Einkaufswagen für einen User
+	
+	// Erstellt einen Einkaufswagen für einen User
 	public static function createCartForCustomer($customerID) {
 		
 		$customer = new Customer($customerID);
@@ -142,6 +145,7 @@ class Order extends DB {
 
 		return $db->insert_id();
 	}
+	
 	// Entfernt eine Position vom Einkaufswagen
 	public static function removeFromCart($customerID, $productID) {
 
@@ -172,7 +176,8 @@ class Order extends DB {
 
 		return TRUE;
 	}
-	// Fügt eine Pizza dem Einkaufswagen hinzu
+	
+	// Fügt eine Pizza dem Einkaufswagen hinzu oder erhöht die Anzahl um Eins.
 	public static function addToCart($customerID, $products) {
 
 		$orderID = NULL;
@@ -190,6 +195,7 @@ class Order extends DB {
 		if ( ! $result ) return FALSE;
 
 		$obj = $result->fetch_object();
+		
 		// Falls der User noch keinen Einkaufswagen hat, erstelle einen
 		if(is_null($obj))
 			$orderID = self::createCartForCustomer($customerID);
@@ -204,6 +210,7 @@ class Order extends DB {
 			$quantity = 1;
 
 			foreach ($cart->getOrderLines() as $j => $orderline) {
+				
 				// Erhöhe die Anzahl der Pizza, falls diese bereits im Einkaufswagen war
 				if($orderline->getProductID() == $productID) {
 					
@@ -240,6 +247,69 @@ class Order extends DB {
 
 			//label for goto
 			bottom:
+		}
+
+		return TRUE;
+	}
+
+	//Vermindert die Anzahl einer Position um Eins oder löscht sie
+	public static function subtractFromCart($customerID, $productID) {
+
+		//OrderID von Warenkorb des Kunden holen
+		$sql = sprintf("SELECT OrderID FROM `" . DB . "`.`" . TABLE_ORDERS . "` 
+			WHERE CustomerID = '%s'
+			AND StatusID = 1
+			LIMIT 1;",
+			mysql_real_escape_string($customerID));
+		
+		$db = new DB();
+
+		$result = $db->doQuery($sql);
+				
+		if ( ! $result ) return FALSE;
+
+		$orderID = $result->fetch_object()->OrderID;
+
+		//Anzahl der Position des Produkts im Warenkorb holen
+		$sql = sprintf("SELECT `Quantity` FROM `" . DB . "`.`" . TABLE_ORDERLINE . "` 
+			WHERE OrderID = '%s'
+			AND ProductID = '%s'
+			LIMIT 1;",
+			mysql_real_escape_string($orderID),
+			mysql_real_escape_string($productID));
+
+		$result = $db->doQuery($sql);
+
+		if ( ! $result ) return FALSE;
+
+		$quantity = $result->fetch_object()->Quantity;
+
+		if($quantity == 1) { //Wenn Anzahl gleich 1, Produkt aus Warenkorb entfernen
+
+			$sql = sprintf("DELETE FROM `" . DB . "`.`" . TABLE_ORDERLINE . "` 
+				WHERE OrderID = '%s'
+				AND ProductID = '%s'
+				LIMIT 1;",
+				mysql_real_escape_string($orderID),
+				mysql_real_escape_string($productID));
+
+			$result = $db->doQuery($sql);
+
+			if ( ! $result ) return FALSE;
+
+		} else { //Wenn Anzahl größer 1, Anzahl um eins vermindern
+
+			$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_ORDERLINE . "` 
+			SET `Quantity`= Quantity - 1
+			WHERE `OrderID`='%s'
+			AND `ProductID`='%s';",
+			mysql_real_escape_string($orderID),
+			mysql_real_escape_string($productID));
+
+			$result = $db->doQuery($sql);
+
+			if ( ! $result ) return FALSE;	
+		
 		}
 
 		return TRUE;

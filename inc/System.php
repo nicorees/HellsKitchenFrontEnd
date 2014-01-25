@@ -47,6 +47,7 @@ class System {
 	private $controllers = array(
 			"cartRemove",
 			"cartAdd",
+			"cartSubtract",
 			"generateProduct",
 			"changeProductVisibility",
 			"rateProduct",

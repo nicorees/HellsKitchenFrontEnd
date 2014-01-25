@@ -31,7 +31,7 @@
 			<th class="text-left">Pizza Name</th>
 			<th class="text-left">Preis</th>
 			<th class="text-left">Anzahl</th>
-			<th class="text-left"></th>
+			<th>Anzahl verändern / Entfernen</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -51,9 +51,17 @@
 				<td><?php echo $p->getName(); ?></td>
 				<td>€ <?php echo $orderline->getPrice(); ?></td>
 				<td><?php echo $orderline->getQuantity(); ?></td>
-				<td>
-					<a href='<?php echo '?c=cartRemove&pid=' . $p->getId() ; ?>' class='fg-crimson'>
-        				<i class="icon-cancel-2"></i>
+				<td class="center">
+					<a href='<?php echo '?c=cartAdd&pid=' . $p->getId() ; ?>' class='fg-emerald'>
+        				<i class="icon-plus-2"></i>
+					</a>
+					&nbsp;|&nbsp; 
+					<a href='<?php echo '?c=cartSubtract&pid=' . $p->getId() ; ?>' class='fg-crimson'>
+        				<i class="icon-minus-2"></i>
+					</a>
+					&nbsp;|&nbsp;
+					<a href='<?php echo '?c=cartRemove&pid=' . $p->getId() ; ?>' class='fg-black'>
+        				<i class="icon-remove"></i>
 					</a>
 				</td>
 			</tr>
