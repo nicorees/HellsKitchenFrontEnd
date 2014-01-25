@@ -61,7 +61,7 @@
 	<input class="textfield" type="password" name="txt_pw2" value="" /> <br/> <br/>
 
 	<input class="button" type="submit" name="btn_edit" value="Speichern" />
-	<a href="javascript:history.back()" class="button" >Zurück</a>
+	&nbsp;<a href="javascript:history.back()" class="button" >Zurück</a>
 </form>
 
 <style type="text/css">
