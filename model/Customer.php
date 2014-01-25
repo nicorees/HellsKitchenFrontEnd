@@ -292,9 +292,10 @@ class Customer extends DB {
 		//führe googlemaps api call durch
 		if($xml=simplexml_load_file($googlemaps_url)){
 			if($xml->status=='OK') {
-				$distance = preg_replace('/\skm/', '', $xml->row->element->distance->text);
+			if( $xml->row->element->status == 'OK' ) {
+				$distance = preg_replace('/\skm/', '', $xml->row->element->distance->value);
 				$distance = preg_replace('/,/', '.', $distance);
-				$distance = (float)$distance;
+				$distance = (float)$distance /1000;
 			} else
 				return false;
 		}

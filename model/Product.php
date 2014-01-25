@@ -75,7 +75,9 @@ class Product extends DB {
 		
 		return TRUE;
 	}
-	
+	/*
+	Lade Zutaten einer Pizza
+	*/
 	private function loadIngredients($productid) {
 		$sql = "SELECT `IngredientID` FROM `". DB ."`.`". TABLE_PRODUCT_HAS_INGREDIENT ."` WHERE ProductID = '$productid';";
 		
@@ -155,7 +157,7 @@ class Product extends DB {
 		
 		return $a;
 	}
-
+	// Gibt alle verfügbaren Zutaten zurück
 	private function allIngredientsAvailable() {
 		foreach ($this->ingredients as $ing) {
 			$ingredient = new Ingredient($ing);
@@ -190,7 +192,7 @@ class Product extends DB {
 		$this->setID($this->insert_id());
 				
 		$ingredients = $this->getIngredients();
-		
+		// Verknüpfe Pizza und Zutaten
 		foreach ($ingredients  as $i) {
 			
 			$sql_save_ingredient = sprintf("INSERT INTO `" . TABLE_PRODUCT_HAS_INGREDIENT . "`
@@ -211,10 +213,11 @@ class Product extends DB {
 		    return FALSE;
 		}		
 	}
-
+	// Ändert die Sichtbarkeit einer Pizza
 	public static function changeProductVisibility($productID) {
 		
 		$product = new Product($productID);
+		// negiere Attribut "private" 
 		$private = ($product->getPrivate()) ? 0 : 1;
 
 		$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_PRODUCT . "` 
@@ -227,8 +230,8 @@ class Product extends DB {
 				
 		return $db->doQuery($sql);
 	}
-
-		public static function rateProduct($productID, $rating) {
+	// Bewerte ein Produkt
+	public static function rateProduct($productID, $rating) {
 		
 		$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_PRODUCT . "` 
 			SET `NumOfRater` = NumOfRater + 1, `SumOfRating` = SumOfRating + %s
@@ -258,6 +261,7 @@ class Product extends DB {
 	}
 
 	public function setName($name) {
+	// Falls der Name leer ist, Bennen Pizza nach Kundenname
 		if(empty($name)) {
 			$customer = new Customer($this->getCustomerID());
 			$name = $customer->getFirstname() . "'s Custom Pizza";
@@ -269,7 +273,7 @@ class Product extends DB {
 	public function getPrice() {
 		return $this->price;
 	}
-
+	// Setze den Preis der Pizza aus den Zutatenpreisen + Grundpreis zusammen 
 	public function setPrice($price) {
 		foreach ($this->ingredients as $ing) {
 			$ingredient = new Ingredient($ing);
@@ -285,6 +289,7 @@ class Product extends DB {
 	}
 
 	public function setDescription($description) {
+		// Fall die Beschreibung leer ist, füge Standardbeschreibung ein
 		if(empty($description)) {
 			$customer = new Customer($this->getCustomerID());
 			$description = "Erstellt von " .  $customer->getFirstname() . " " . $customer->getLastname();

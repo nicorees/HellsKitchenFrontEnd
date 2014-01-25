@@ -6,7 +6,7 @@
 	 */
 
 	$cart = Order::getCart($_SESSION['customerID']);
-	
+	// Infos Falls Warenkorb leer
 	if(empty($cart->getOrderLines())) {
 		
 		echo "

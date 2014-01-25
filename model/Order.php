@@ -63,13 +63,13 @@ class Order extends DB {
 
 		$totalPrice = 0;
 		$deliveryCosts = NULL;
-
+		// Berechne den Gesamtpreis
 		foreach ($this->getOrderLines() as $j => $orderline) {
 			$totalPrice += ( $orderline->getPrice() * $orderline->getQuantity() ) ;
 		}
 
 		$this->setTotalPrice($totalPrice);
-
+		// Wenn keine Selbstabholung, dann Lieferkosten berechnen
 		if(!$pickup) {
 			$deliveryCosts = Address::calculateDeliveryCosts($addressID);
 			if (!$deliveryCosts) return FALSE;	
@@ -81,7 +81,7 @@ class Order extends DB {
 
 		return $this->save();
 	}
-
+	// Liefert den Einkaufswagen eines bestimmen Benutzers
 	public static function getCart($customerID) {
 
 		$sql = sprintf("SELECT OrderID FROM `" . DB . "`.`" . TABLE_ORDERS . "` 
@@ -97,7 +97,7 @@ class Order extends DB {
 		if ( ! $result ) return FALSE;
 
 		$obj = $result->fetch_object();
-
+		// Hatte der User noch keinen Einkaufswagen, wird einer erstellt
 		if($obj == NULL) {
 			self::createCartForCustomer($customerID);
 			header("Location: " . URL_BASE . "?p=cart");
@@ -105,7 +105,7 @@ class Order extends DB {
 
 		return new Order($obj->OrderID);
 	}
-
+	// Speichert die Bestellung
 	public function save() {
 
 		$sql = sprintf("UPDATE `" . DB . "`.`" . TABLE_ORDERS . "` 
@@ -126,7 +126,7 @@ class Order extends DB {
 
 		return $this->doQuery($sql);
 	}
-
+	// Erstelle einen Einkaufswagen für einen User
 	public static function createCartForCustomer($customerID) {
 		
 		$customer = new Customer($customerID);
@@ -142,7 +142,7 @@ class Order extends DB {
 
 		return $db->insert_id();
 	}
-
+	// Entfernt eine Position vom Einkaufswagen
 	public static function removeFromCart($customerID, $productID) {
 
 		$sql = sprintf("SELECT OrderID FROM `" . DB . "`.`" . TABLE_ORDERS . "` 
@@ -172,7 +172,7 @@ class Order extends DB {
 
 		return TRUE;
 	}
-
+	// Fügt eine Pizza dem Einkaufswagen hinzu
 	public static function addToCart($customerID, $products) {
 
 		$orderID = NULL;
@@ -190,7 +190,7 @@ class Order extends DB {
 		if ( ! $result ) return FALSE;
 
 		$obj = $result->fetch_object();
-
+		// Falls der User noch keinen Einkaufswagen hat, erstelle einen
 		if(is_null($obj))
 			$orderID = self::createCartForCustomer($customerID);
 		else
@@ -204,7 +204,7 @@ class Order extends DB {
 			$quantity = 1;
 
 			foreach ($cart->getOrderLines() as $j => $orderline) {
-				
+				// Erhöhe die Anzahl der Pizza, falls diese bereits im Einkaufswagen war
 				if($orderline->getProductID() == $productID) {
 					
 					$quantity = $orderline->getQuantity() + 1;

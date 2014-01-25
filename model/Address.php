@@ -67,7 +67,7 @@ class Address extends DB{
 				return FALSE;
 		}
 	}
-	
+	// Berechne die Lieferkosten in Abhängigkeit von der Distanzklasse 
 	public static function calculateDeliveryCosts($id) {
 
 		$db = new DB();
@@ -77,7 +77,7 @@ class Address extends DB{
 		$result = $db->doQuery($sql);
 				
 		if ( ! $result ) return FALSE;
-		
+		// lese die Distanzklasen
 		$distClass1 = $result->fetch_object();
 		$distClass2 = $result->fetch_object();
 		$distClass3 = $result->fetch_object();
@@ -93,7 +93,7 @@ class Address extends DB{
 		$distance = $result->fetch_object()->Distance;
 
 		$deliveryCosts = 0;
-
+		// Führe Zuordnung zur Distanzklasse durch
 		if($distance >= 0 && $distance <= $distClass1->Maximum)
 			$deliveryCosts = $distClass1->Price;
 		elseif ($distance > $distClass1->Maximum && $distance <= $distClass2->Maximum)
@@ -105,7 +105,7 @@ class Address extends DB{
 
 		return $deliveryCosts;
 	}
-
+	// Prüfe ob die Entferung kleiner der größten Distanzklasse ist
 	public static function AddressInRange($distance) {
 		
 		$db = new DB();
@@ -123,7 +123,7 @@ class Address extends DB{
 		return ($distance <= $distClass3->Maximum);
 
 	}
-
+	// Ermittle die maximale Entfernung
 	public static function maxDistance() {
 		
 		$db = new DB();
