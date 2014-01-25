@@ -6,6 +6,10 @@
 	 */
 
 	$orders = Order::getAllOrders($_SESSION['customerID']);
+
+	if(empty($orders))
+		header("Location: .?e=noOrders");
+
 ?>
 
 <h1>Alle deine Bestellungen</h1>
@@ -14,7 +18,7 @@
 	<thead>
 		<tr>
 			<th class="text-left">BestellNr.</th>
-			<th class="text-left">Datum &amp Uhrzeit</th>
+			<th class="text-left">Datum &amp; Uhrzeit</th>
 			<th class="text-left">Adresse / Selbstabholung</th>
 			<th class="text-left">Warenwert</th>
 			<th class="text-left">Lieferkosten</th>

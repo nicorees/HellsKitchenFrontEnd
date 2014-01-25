@@ -59,7 +59,8 @@ class System {
 			"registrationFailed",
 			"orderAdded",
 			"productCreated",
-			"productCreationFailed"
+			"productCreationFailed",
+			"noOrders"
 	);
 
 	public function __construct() {
