@@ -47,7 +47,7 @@
 			<input class="textfield" type="text" name="txt_stadt" value="" /> <br /> <br />
 			
 			<input type="submit" name="btn_save" value="Adresse anlegen" />
-			<a class="button" href="?p=editData">Zurück</a>
+			&nbsp;<a class="button" href="?p=editData">Zurück</a>
 </form>
 
 <style type="text/css">
