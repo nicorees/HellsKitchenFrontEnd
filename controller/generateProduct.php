@@ -43,9 +43,6 @@
 		$product->setIngredients($id);
 		$product->setPrivate($private);
 		$product->setDescription($description);
-
-		var_dump($product);
-		die;
 		
 		if($product->saveProduct())
 			header("Location: " . URL_BASE . "?p=displayPrivateProducts&e=productCreated");
