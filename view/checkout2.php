@@ -3,7 +3,7 @@
 	/**
 	 * Diese View repräsentiert den zweiten Schritt des Abschlusses
 	 * einer Bestellung
-	 * @author Nicholas Rees
+	 * @author Christian Vogg, Nicholas Rees
 	 */
 
 	$cart = Order::getCart($_SESSION['customerID']);
