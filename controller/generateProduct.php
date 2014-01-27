@@ -31,8 +31,10 @@
 		else
 			$private = TRUE;
 
-		if(empty($name) || empty($description) || empty($id))
+		if(empty($name) || empty($description) || empty($id)) {
 			header("Location: " . URL_BASE . "?p=configurePizza&e=productCreationFailed");
+			die;
+		}
 		
 		// Besitzer / Ersteller
 		$customerID = $_SESSION['customerID'];
